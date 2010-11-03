@@ -1,16 +1,9 @@
 #============================================================
 #
-# PERSONAL $HOME/.bashrc FILE
+# PERSONAL .bashrc FILE
 # By Josh Finnie <josh@jfin.us>
 #
 # Last modified: 3 Nov 2010
-#
-# This file is read (normally) by interactive shells only.
-# Here is the place to define your aliases, functions and
-# other interactive features like your prompt.
-#
-# The majority of the code here assumes you are on a GNU 
-# system (most likely a Linux box)
 #
 #=============================================================
 
@@ -98,3 +91,51 @@ alias install='apt-get install' # mostly for webfaction
 #-------------------------------------------------------------
 alias google='lynx http://google.com'
 alias hn='lynx http://news.ycombinator.com'
+
+#-------------------------------------------------------------
+# Fun functions
+#-------------------------------------------------------------
+# Weather by us zip code - Can be called two ways # weather 50315 # weather "Des Moines"
+weather ()
+{
+declare -a WEATHERARRAY
+WEATHERARRAY=( `lynx -dump "http://www.google.com/search?hl=en&lr=&client=firefox-a&rls=org.mozilla%3Aen-US%3Aofficial&q=weather+${1}&btnG=Search" | grep -A 5 -m 1 "Weather for"`)
+echo ${WEATHERARRAY[@]}
+}
+
+# Stock prices - can be called two ways. # stock novl  (this shows stock pricing)  #stock "novell"  (this way shows stock symbol for novell)
+stock ()
+{
+stockname=`lynx -dump http://finance.yahoo.com/q?s=${1} | grep -i ":${1})" | sed -e 's/Delayed.*$//'`
+stockadvise="${stockname} - delayed quote."
+declare -a STOCKINFO
+STOCKINFO=(` lynx -dump http://finance.yahoo.com/q?s=${1} | egrep -i "Last Trade:|Change:|52wk Range:"`)
+stockdata=`echo ${STOCKINFO[@]}`
+    if [[ ${#stockname} != 0 ]] ;then
+        echo "${stockadvise}"
+        echo "${stockdata}"
+            else
+            stockname2=${1}
+            lookupsymbol=`lynx -dump -nolist http://finance.yahoo.com/lookup?s="${1}" | grep -A 1 -m 1 "Portfolio" | grep -v "Portfolio" | sed 's/\(.*\)Add/\1 /'`
+                if [[ ${#lookupsymbol} != 0 ]] ;then
+                echo "${lookupsymbol}"
+                    else
+                    echo "Sorry $USER, I can not find ${1}."
+                fi
+    fi
+}
+define ()
+{
+lynx -dump "http://www.google.com/search?hl=en&q=define%3A+${1}&btnG=Google+Search" | grep -m 5 -w "*"  | sed 's/;/ -/g' | cut -d- -f5 > /tmp/templookup.txt
+            if [[ -s  /tmp/templookup.txt ]] ;then    
+                until ! read response
+                    do
+                    echo "${response}"
+                    done < /tmp/templookup.txt
+                else
+                    echo "Sorry $USER, I can't find the term \"${1} \""                
+            fi    
+rm -f /tmp/templookup.txt
+}
+#Minecraft
+alias mc='cd ~/Desktop && java -Xmx256M -Xms256M -cp Minecraft.jar net.minecraft.LauncherFrame'

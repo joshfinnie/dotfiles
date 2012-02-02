@@ -11,16 +11,33 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Editing behavior
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-filetype on
-filetype plugin on
-filetype indent on
+filetype off                         "Required for Vundle
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle Setup
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vundle Bundles
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Bundle 'gmarik/vundle'               "Required for Vundle
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'wincent/Command-T'
+Bundle 'mileszs/ack.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-surround'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-repeat'
 
 set nowrap
 set tabstop=4
 set backspace=indent,eol,start
 set autoindent
 set copyindent
-set number
+set relativenumber
 set shiftwidth=4
 set shiftround
 set showmatch

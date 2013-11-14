@@ -1,3 +1,0 @@
-h1. Josh Finnie's Configuration Files (aka dotfiles)
-
-These are here so that I can unify the configuration of bash and vim across multiple computers.  Feel free to take a look at them and take anything you feel you might need for your own files.

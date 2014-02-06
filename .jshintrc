@@ -1,0 +1,31 @@
+/* -*- mode: javascript -*-
+ * See www.jshint.com/docs/
+ * Run manually to check for syntax errors here:
+ *   jshint myfile.js
+ */
+{
+    "bitwise":              true,
+    "camelcase":            true,
+    "curly":                true,
+    "eqeqeq":               true,
+    "forin":                true,
+    "immed":                true,
+    "indent":               2,
+    "latedef":              true,
+    "maxcomplexity":        42,
+    "maxdepth":             5,
+    "maxlen":               80,
+    "maxparams":            10,
+    "maxstatements":        30,
+    "newcap":               true,
+    "noarg":                true,
+    "noempty":              true,
+    "nonew":                true,
+    "plusplus":             true,
+    "quotmark":             "single",
+    "regexp":               true,
+    "strict":               true,
+    "trailing":             true,
+    "undef":                true,
+    "unused":               true
+}

@@ -18,6 +18,9 @@ source $ZSH/oh-my-zsh.sh
 export WORKON_HOME=/usr/local/env
 source /usr/local/bin/virtualenvwrapper.sh
 
+### Adding location for NPM with Homebrew Node
+export PATH="/usr/local/share/npm/bin:$PATH"
+
 # Aliases
 source $HOME/.aliases
 

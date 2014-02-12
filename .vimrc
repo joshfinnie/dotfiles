@@ -22,6 +22,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'bling/vim-airline'
+Bundle 'digitaltoad/vim-jade'
 Bundle 'gmarik/vundle'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'kchmck/vim-coffee-script'

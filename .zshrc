@@ -14,6 +14,8 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export EDITOR='vim'
+
 # Virtualenv Wrapper
 export WORKON_HOME=/usr/local/env
 source /usr/local/bin/virtualenvwrapper.sh

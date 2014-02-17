@@ -9,34 +9,48 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Preamble
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-set nocompatible
-filetype off
-syntax on
+set nocompatible                  " sets vi capatiblity to no
+syntax enable                     " enables syntax processing
 
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
+filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'bling/vim-airline'
-Bundle 'digitaltoad/vim-jade'
+" let Vundle manage Vundle
 Bundle 'gmarik/vundle'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'kchmck/vim-coffee-script'
+
+" Bundles {{{
+Bundle 'Raimondi/delimitMate'
+Bundle 'airblade/vim-rooter'
+Bundle 'amirh/HTML-AutoCloseTag'
+Bundle 'bling/vim-airline'
+Bundle 'gregsexton/MatchTag'
+Bundle 'majutsushi/tagbar'
+Bundle 'mattn/emmet-vim'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tomtom/vimtlib'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/Align'
+Bundle 'kien/ctrlp.vim'
+"}}}
 
-map <C-n> :NERDTreeToggle<CR>
+" Syntax Highlighting {{{
+Bundle 'digitaltoad/vim-jade'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'jiangmiao/simple-javascript-indenter'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'othree/html5-syntax.vim'
+Bundle 'tpope/vim-markdown'
+"}}}
 
-let g:airline_enabled=1
-let g:airline_powerline_fonts=1
-let g:airline_theme='solarized'
-set guifont=Inconsolata\ for\ Powerline
-
+filetype plugin indent on         " load file-type specific indent files
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -46,11 +60,12 @@ set autoindent
 set autoread
 set autowrite
 set backspace=indent,eol,start
+set colorcolumn=+1
 set encoding=utf-8
 set hidden
 set history=1000
 set laststatus=2
-set lazyredraw
+set lazyredraw                    " redray only when needed
 set linebreak
 set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
@@ -60,16 +75,18 @@ set modelines=5
 set mouse=a
 set noerrorbells
 set notimeout
-set number
+set number                        " show line numbers
 set relativenumber
 set ruler
 set shiftround
-set showbreak=↪
-set showcmd
+set shiftwidth=4
+set showcmd                       " show command in bottom bar
+set showmatch                     " highlights matching [{()}]
 set showmode
 set splitbelow
 set splitright
 set termencoding=utf-8
+set textwidth=0
 set title
 set ttimeout
 set ttimeoutlen=10
@@ -77,8 +94,25 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 set visualbell
+set wildmenu                      " visual autocomplete for command menu
+set wrap
+set wrapmargin=0
 
 " }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabs & Spaces
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
+set tabstop=4                     " number of visual spaces per TAB is 4
+set softtabstop=4                 " number of spaces in tabs while editing is 4
+set expandtab                     " tabs are saved as spaces
+
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+autocmd Filetype coffeescript setlocal ts=2 sts=2 sw=2
+autocmd Filetype html setlocal ts=2 sts=2 sw=2
+autocmd Filetype jade setlocal ts=2 sts=2 sw=2
+
+"}}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Nice Commands
@@ -102,19 +136,6 @@ augroup line_return
 augroup END
 
 " }}}
-
-" }}}
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tabs, Spaces, and Wrapping
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
-set wrap
-set textwidth=80
-set formatoptions=qrn1j
-set colorcolumn=+1
 
 " }}}
 
@@ -144,7 +165,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings and Movement
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-let mapleader=","
+let mapleader=","                 " making the leader a comma
 let maplocalleader="\\"
 nnoremap ; :
 vmap Q gq
@@ -158,6 +179,10 @@ map <down> <nop>
 map <left> <nop>
 map <right> <nop>
 
+noremap <left> :bp<cr>
+noremap <right> :bn<cr>
+
+" move vertically by visual line
 noremap j gj
 noremap k gk
 noremap gj j
@@ -198,15 +223,22 @@ cnoremap w!! w !sudo tee % >/dev/null
 " Sort lines
 nnoremap <leader>s vip:!sort<cr>
 vnoremap <leader>s :!sort<cr>
+
+" edit vimrc/zshrc/tmux.conf and load vimrc bindings
+nnoremap <leader>ev :vsp $MYVIMRC<cr>
+nnoremap <leader>ez :vsp ~/.zshrc<cr>
+nnoremap <leader>et :vsp ~/.tmux.conf<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set gdefault
-set hlsearch
+set hlsearch                      " highlight matches
 set ignorecase
-set incsearch
+set incsearch                     " search as characters are entered
 set showmatch
 set smartcase
 
@@ -224,13 +256,14 @@ noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{{{
-set foldlevelstart=0
-set foldmethod=indent
-set foldnestmax=10
-set nofoldenable
+set nofoldenable                  " diables folding on file open
 
-nnoremap <Space> za
-vnoremap <Space> za
+set foldlevelstart=0             " closes all folds on activation
+set foldmethod=indent            " folds on code indentation
+set foldnestmax=10               " has max of 10 nested folds
+
+nnoremap <Space> za              " remap fold toggling to space
+vnoremap <Space> za              " remap fold toggling to space
 
 " Make zO recursively open whatever fold we're in, even if it's partially open.
 nnoremap z0 zcz0
@@ -248,7 +281,7 @@ function! MyFoldText() " {{{
 
     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' '
 endfunction " }}}
 set foldtext=MyFoldText()
 " }}}
@@ -256,6 +289,7 @@ set foldtext=MyFoldText()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype Specific Stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " Vim {{{
 augroup ft_vim
     au!
@@ -268,8 +302,31 @@ augroup END
 " Javascript {{{
 augroup ft_javascript
     au!
-    au Filetype javascript inoremap <buffer> {<cr> {}<left><cr><space><space><space><space>.<cr><esc>kA<bs>
+    au Filetype javascript inoremap <buffer> {<cr> {}<left><cr><space><space>.<cr><esc>kA<bs>
 augroup END
 " }}}
 
 " }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Specific Stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
+" NerdTree {{{
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
+"}}}
+
+" CtrlP {{{
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+""}}}
+
+" Airline {{{
+let g:airline_enabled=1
+let g:airline_powerline_fonts=1
+let g:airline_theme='solarized'
+set guifont=Inconsolata\ for\ Powerline
+"}}}
+
+"}}}

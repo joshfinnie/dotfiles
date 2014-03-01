@@ -260,7 +260,7 @@ noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{{{
 set nofoldenable                  " diables folding on file open
 
-set foldlevelstart=0             " closes all folds on activation
+set foldlevelstart=10             " closes all folds on activation
 set foldmethod=indent            " folds on code indentation
 set foldnestmax=10               " has max of 10 nested folds
 

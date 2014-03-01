@@ -23,6 +23,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 ### Adding location for NPM with Homebrew Node
 export PATH="/usr/local/share/npm/bin:$PATH"
 
+### Adding location for Postgres app
+export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
+
 # Aliases
 source $HOME/.aliases
 

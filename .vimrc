@@ -11,6 +11,8 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set nocompatible                  " sets vi capatiblity to no
 syntax enable                     " enables syntax processing
+set background=dark
+colorscheme molokai
 
 " }}}
 

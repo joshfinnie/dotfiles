@@ -54,6 +54,13 @@ Bundle 'othree/html5-syntax.vim'
 Bundle 'tpope/vim-markdown'
 "}}}
 
+" SnipMate {{{
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'honza/vim-snippets'
+"}}}
+
 filetype plugin indent on         " load file-type specific indent files
 " }}}
 

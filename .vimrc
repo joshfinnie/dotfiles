@@ -41,6 +41,7 @@ Bundle 'tomtom/vimtlib'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/Align'
+Bundle 'scrooloose/nerdcommenter'
 "}}}
 
 " Syntax Highlighting {{{

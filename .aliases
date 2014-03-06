@@ -16,3 +16,5 @@ alias ccd='clear && cd'
 alias spotify='/usr/local/src/personal/SpotifyControl/SpotifyControl.scpt'
 alias personal='cd /usr/local/src/personal'
 alias koansys='cd /usr/local/src/koansys'
+
+alias tmux="tmux -2"

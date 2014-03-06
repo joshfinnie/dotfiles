@@ -29,4 +29,6 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
 # Aliases
 source $HOME/.aliases
 
+export TERM="screen-256color"
+
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

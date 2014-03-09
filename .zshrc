@@ -17,8 +17,13 @@ source $ZSH/oh-my-zsh.sh
 export EDITOR='vim'
 
 # Virtualenv Wrapper
-export WORKON_HOME=/usr/local/env
+export WORKON_HOME=$HOME/.venvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python2.7
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_RESPECT_VIRTUALENV=true
 source /usr/local/bin/virtualenvwrapper.sh
+
+export PATH="/usr/local/bin:$PATH"
 
 ### Adding location for NPM with Homebrew Node
 export PATH="/usr/local/share/npm/bin:$PATH"

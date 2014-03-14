@@ -54,6 +54,7 @@ Bundle 'jiangmiao/simple-javascript-indenter'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'tpope/vim-markdown'
+Bundle 'scrooloose/syntastic'
 "}}}
 
 " SnipMate {{{

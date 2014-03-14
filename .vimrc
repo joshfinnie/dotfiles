@@ -71,7 +71,7 @@ filetype plugin indent on         " load file-type specific indent files
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set autoindent
 set autoread
-set autowrite
+set autowriteall
 set backspace=indent,eol,start
 set colorcolumn=+1
 set encoding=utf-8
@@ -147,6 +147,8 @@ augroup line_return
         \     execute 'normal! g`"zvzz' |
         \ endif
 augroup END
+
+:au FocusLost * silent! wa        " Saves on loss of focus
 
 " }}}
 

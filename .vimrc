@@ -330,6 +330,7 @@ augroup END
 " NerdTree {{{
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeWinSize = 50
 "}}}
 
 " CtrlP {{{

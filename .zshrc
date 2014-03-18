@@ -23,6 +23,18 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 source /usr/local/bin/virtualenvwrapper.sh
 
+has_virtualenv() {
+    if [ -e .venv ]; then
+        workon `cat .venv`
+    fi
+}
+
+venv_cd() {
+    cd "$@" && has_virtualenv
+}
+
+alias cd="venv_cd"
+
 export PATH="/usr/local/bin:$PATH"
 
 ### Adding location for NPM with Homebrew Node

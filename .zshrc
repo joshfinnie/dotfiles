@@ -38,6 +38,7 @@ alias cd="venv_cd"
 export PATH="/usr/local/bin:$PATH"
 
 ### Adding location for NPM with Homebrew Node
+export NODE_PATH="/usr/local/lib/node"
 export PATH="/usr/local/share/npm/bin:$PATH"
 
 ### Adding location for Postgres app

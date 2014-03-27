@@ -246,6 +246,9 @@ nnoremap <leader>ez :e ~/.zshrc<cr>
 nnoremap <leader>et :e ~/.tmux.conf<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+" Reload all the things!
+nnoremap <leader>r :bufdo e<cr>
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

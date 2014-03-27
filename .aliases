@@ -14,7 +14,7 @@ alias edit='subl . &'
 alias serve='python -m SimpleHTTPServer'
 alias ccd='clear && cd'
 alias spotify='/usr/local/src/personal/SpotifyControl/SpotifyControl.scpt'
-alias personal='cd /usr/local/src/personal'
-alias koansys='cd /usr/local/src/koansys'
+alias personal='cd ~/src/p/'
+alias tm='cd ~/src/tm/'
 
 alias tmux="tmux -2"

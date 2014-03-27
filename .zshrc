@@ -47,6 +47,9 @@ export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
 # Aliases
 source $HOME/.aliases
 
+# oh-my-zsh specific aliases
+alias bower='noglob bower'
+
 export TERM="screen-256color"
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

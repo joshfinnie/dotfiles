@@ -44,6 +44,9 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 ### Adding location for Postgres app
 export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
 
+### Adding location for Latex (After downloading it from here: http://tug.org/mactex/)
+export PATH="$PATH:/usr/texbin"
+
 # Aliases
 source $HOME/.aliases
 

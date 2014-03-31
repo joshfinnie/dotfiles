@@ -108,6 +108,7 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 set visualbell
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,node_modules,*.pyc
 set wildmenu                      " visual autocomplete for command menu
 set wrap
 set wrapmargin=0
@@ -340,6 +341,10 @@ let NERDTreeWinSize = 50
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp|node_modules$',
+  \ 'file': '\.exe$\|\.so$\|\.dat|\.pyc$'
+  \ }
 ""}}}
 
 " Airline {{{

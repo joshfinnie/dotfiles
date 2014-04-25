@@ -327,6 +327,10 @@ augroup ft_javascript
 augroup END
 " }}}
 
+" Trackmaven {{{
+au BufRead,BufNewFile *.template setfiletype html
+"}}}
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

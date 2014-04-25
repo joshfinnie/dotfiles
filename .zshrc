@@ -44,6 +44,9 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 ### Adding location for Postgres app
 export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
 
+### Adding path for Homebrewed Ruby gems
+export PATH=$(brew --prefix ruby)/bin:$PATH
+
 ### Adding location for Latex (After downloading it from here: http://tug.org/mactex/)
 export PATH="$PATH:/usr/texbin"
 
@@ -54,5 +57,3 @@ source $HOME/.aliases
 alias bower='noglob bower'
 
 export TERM="screen-256color"
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

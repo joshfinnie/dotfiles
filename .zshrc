@@ -50,6 +50,10 @@ export PATH=$(brew --prefix ruby)/bin:$PATH
 ### Adding location for Latex (After downloading it from here: http://tug.org/mactex/)
 export PATH="$PATH:/usr/texbin"
 
+### Adding paths for Golang
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
 # Aliases
 source $HOME/.aliases
 

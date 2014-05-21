@@ -60,4 +60,8 @@ source $HOME/.aliases
 # oh-my-zsh specific aliases
 alias bower='noglob bower'
 
+# Android SDK (from Homebrew) path
+export ANDROID_HOME=/usr/local/opt/android-sdk
+
+
 export TERM="screen-256color"

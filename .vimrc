@@ -255,6 +255,9 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " Reload all the things!
 nnoremap <leader>r :bufdo e<cr>
 
+" Create links in Markdown
+nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela(http://)<esc>ha
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

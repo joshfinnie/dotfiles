@@ -366,4 +366,10 @@ let g:airline_theme='solarized'
 set guifont=Inconsolata\ for\ Powerline
 "}}}
 
+" PyMode {{{
+let g:pymode_folding = 0
+autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+"}}}
+
 "}}}

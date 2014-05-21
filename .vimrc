@@ -83,7 +83,7 @@ set history=1000
 set laststatus=2
 set lazyredraw                    " redray only when needed
 set linebreak
-set list
+set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchtime=3
 set modeline

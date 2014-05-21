@@ -233,6 +233,9 @@ inoremap jj <Esc>
 " Clean trailing whitespace
 nnoremap <leader>ww mz:%s/\s\+$//<cr>:let @/=''<cr>`z
 
+" Toggle Spell Check
+nnoremap <F5> :setlocal spell! spelllang=en_us<CR>
+
 " Toggle Paste
 nnoremap <F6> :set paste!<cr>
 

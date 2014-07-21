@@ -256,6 +256,7 @@ vnoremap <leader>s :!sort<cr>
 " edit vimrc/zshrc/tmux.conf and load vimrc bindings
 nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>ez :e ~/.zshrc<cr>
+nnoremap <leader>ea :e ~/.aliases<cr>
 nnoremap <leader>et :e ~/.tmux.conf<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 

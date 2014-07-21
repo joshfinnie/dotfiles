@@ -63,5 +63,7 @@ alias bower='noglob bower'
 # Android SDK (from Homebrew) path
 export ANDROID_HOME=/usr/local/opt/android-sdk
 
+# Bumping up VM RAM to 4GB
+export VM_MEMORY=4096
 
 export TERM="screen-256color"

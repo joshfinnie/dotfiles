@@ -101,6 +101,7 @@ set showmatch                     " highlights matching [{()}]
 set showmode
 set splitbelow
 set splitright
+set synmaxcol=512
 set termencoding=utf-8
 set textwidth=0
 set title

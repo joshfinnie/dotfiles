@@ -44,13 +44,16 @@ Bundle 'tomtom/vimtlib'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/Align'
-Bundle 'scrooloose/nerdcommenter'
+Bundle 'tpope/vim-commentary'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'jmcantrell/vim-virtualenv'
 "}}}
 
 " Syntax Highlighting {{{
 Bundle 'dart-lang/dart-vim-plugin'
 Bundle 'digitaltoad/vim-jade'
 Bundle 'groenewege/vim-less'
+Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'jiangmiao/simple-javascript-indenter'
@@ -58,6 +61,7 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'othree/html5-syntax.vim'
 Bundle 'tpope/vim-markdown'
 Bundle 'scrooloose/syntastic'
+Bundle 'lilydjwg/colorizer'
 "}}}
 
 " SnipMate {{{

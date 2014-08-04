@@ -390,4 +390,8 @@ autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 "}}}
 
+" TagBar {{{
+nnoremap <leader>tb :TagbarToggle<cr>
+"}}}
+
 "}}}

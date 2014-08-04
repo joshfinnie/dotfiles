@@ -12,9 +12,10 @@
 set nocompatible                  " sets vi capatiblity to no
 syntax enable                     " enables syntax processing
 set background=dark
+set term=screen-256color
 set t_Co=256
 colorscheme solarized
-set shell=/bin/zsh
+set shell=/bin/sh
 
 " }}}
 

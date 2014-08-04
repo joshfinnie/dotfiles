@@ -351,6 +351,11 @@ augroup END
 au BufRead,BufNewFile *.template setfiletype html
 "}}}
 
+" Generic {{{
+" Autoclose NERDTree if it's the only window left open.
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" }}}
+
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

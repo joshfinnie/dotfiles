@@ -1,10 +1,20 @@
-# adding local/bin to path.
+# setting terminal to be 256 colors
+set -g -x TERM screen-256color
+
+# adding local/bin to PATH
 set -g -x PATH /usr/local/bin $PATH
 
-# eliminating welcom message.
+# setting editor
+set -x EDITOR vim
+setenv EDITOR vim
+
+# eliminating welcome message
 set -g -x fish_greeting
 
-# Loading Virtualfish Plugin
+# adding path for ruby gem
+set -g -x PATH $PATH /usr/local/opt/ruby/bin
+
+# setting up virtual fish
 if not set -q VIRTUALFISH_HOME
     set -g VIRTUALFISH_HOME $HOME/.venvs
 end
@@ -19,10 +29,13 @@ function _venvdeactivate --on-event virtualenv_did_deactivate
     echo "The virtualenv \""(basename $VIRTUAL_ENV)"\" was deactivated"
 end
 
+# setting powerline as my prompt
 function fish_prompt
     ~/powerline-shell.py $status --shell bare ^/dev/null
 end
 
+# aliases
+alias tmux="tmux -2"
 set -g -x TERM screen-256color
 
 alias rm 'rm -i'
@@ -38,5 +51,3 @@ alias spotify '/usr/local/src/personal/SpotifyControl/SpotifyControl.scpt'
 alias personal 'cd ~/src/personal/'
 alias tm 'cd ~/src/trackmaven/'
 alias killpyc 'find . -name \*.pyc -delete'
-
-alias tmux="tmux -2"

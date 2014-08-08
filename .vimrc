@@ -263,6 +263,7 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 nnoremap <leader>ez :e ~/.zshrc<cr>
 nnoremap <leader>ea :e ~/.aliases<cr>
 nnoremap <leader>et :e ~/.tmux.conf<cr>
+nnoremap <leader>ef :e ~/.config/fish/config.fish<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Reload all the things!

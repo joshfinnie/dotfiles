@@ -1,0 +1,15 @@
+# ~/.tmuxinator/trackmaven.yml
+
+name: trackmaven
+root: ~/src/trackmaven/TrackMaven
+
+pre_window: docker-osx shell
+
+windows:
+- editor:
+    layout: d0cc,272x63,0,0{171x63,0,0,18,100x63,172,0[100x15,172,0,19,100x15,172,16,21,100x31,172,32,20]}
+    panes:
+    - vim
+    - workon trackmaven; maven start
+    - workon trackmaven; sleep 5; maven run python trackmaven/manage.py shell_plus
+    - workon trackmaven; clear

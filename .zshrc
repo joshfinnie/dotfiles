@@ -1,8 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="joshfinnie"
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -12,7 +10,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/bin:/usr/bin:/usr/sbin:/sbin"
+export PATH
 
 export EDITOR='vim'
 
@@ -34,8 +33,6 @@ venv_cd() {
 }
 
 alias cd="venv_cd"
-
-export PATH="/usr/local/bin:$PATH"
 
 ### Adding location for NPM with Homebrew Node
 export NODE_PATH="/usr/local/lib/node"

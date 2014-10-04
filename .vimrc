@@ -24,60 +24,64 @@ let maplocalleader="\\"
 " Vundle
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-" Bundles {{{
-Bundle 'Raimondi/delimitMate'
-Bundle 'airblade/vim-rooter'
-Bundle 'amirh/HTML-AutoCloseTag'
-Bundle 'bling/vim-airline'
-Bundle 'gregsexton/MatchTag'
-Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
-Bundle 'majutsushi/tagbar'
-Bundle 'mattn/emmet-vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tomtom/vimtlib'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/Align'
-Bundle 'tpope/vim-commentary'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'jmcantrell/vim-virtualenv'
+" Plugins {{{
+Plugin 'Raimondi/delimitMate'
+Plugin 'airblade/vim-rooter'
+Plugin 'amirh/HTML-AutoCloseTag'
+Plugin 'bling/vim-airline'
+Plugin 'gregsexton/MatchTag'
+Plugin 'kien/ctrlp.vim'
+Plugin 'klen/python-mode'
+Plugin 'majutsushi/tagbar'
+Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'tomtom/vimtlib'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/Align'
+Plugin 'tpope/vim-commentary'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'jmcantrell/vim-virtualenv'
+Plugin 'mileszs/ack.vim'
 "}}}
 
 " Syntax Highlighting {{{
-Bundle 'dart-lang/dart-vim-plugin'
-Bundle 'digitaltoad/vim-jade'
-Bundle 'groenewege/vim-less'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'jiangmiao/simple-javascript-indenter'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'othree/html5-syntax.vim'
-Bundle 'tpope/vim-markdown'
-Bundle 'scrooloose/syntastic'
-Bundle 'lilydjwg/colorizer'
+Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'fatih/vim-go'
+Plugin 'groenewege/vim-less'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'jiangmiao/simple-javascript-indenter'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'othree/html5-syntax.vim'
+Plugin 'tpope/vim-markdown'
+Plugin 'scrooloose/syntastic'
+Plugin 'lilydjwg/colorizer'
 "}}}
 
 " SnipMate {{{
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'honza/vim-snippets'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
 "}}}
 
+call vundle#end()
 filetype plugin indent on         " load file-type specific indent files
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
+
 set autoindent
 set autoread
 set autowriteall

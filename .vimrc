@@ -11,12 +11,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set nocompatible                  " sets vi capatiblity to no
 syntax enable                     " enables syntax processing
-set background=dark
-set term=screen-256color
-set termencoding=utf-8
 set t_Co=256
-colorscheme solarized
-set shell=/bin/sh
+set termencoding=utf-8
+colorscheme jellybeans
+highlight Normal ctermfg=grey ctermbg=black
+let mapleader=","                 " making the leader a comma
+let maplocalleader="\\"
 
 " }}}
 
@@ -82,7 +82,6 @@ set autoindent
 set autoread
 set autowriteall
 set backspace=indent,eol,start
-set colorcolumn=80
 set encoding=utf-8
 set hidden
 set history=1000
@@ -117,7 +116,7 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 set visualbell
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,node_modules,*.pyc
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/**,*.pyc,*/.bower-cache/**,*/.sass-cache/**
 set wildmenu                      " visual autocomplete for command menu
 set wrap
 set wrapmargin=0
@@ -125,18 +124,21 @@ set wrapmargin=0
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tabs & Spaces
+" Tabs, Spaces & ColorColumn
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set tabstop=4                     " number of visual spaces per TAB is 4
 set softtabstop=4                 " number of spaces in tabs while editing is 4
 set expandtab                     " tabs are saved as spaces
 
-autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
-autocmd Filetype coffeescript setlocal ts=2 sts=2 sw=2
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 colorcolumn=80
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Filetype jade setlocal ts=2 sts=2 sw=2
 autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype go setlocal ts=8 sts=8 sw=8
+
+highlight ColorColumn ctermbg=grey
+nnoremap <leader>cc :setlocal colorcolumn=80<CR>
 
 " Key bindings for adjusting the tab/shift width.
 nnoremap <leader>w2 :setlocal tabstop=2<CR>:setlocal shiftwidth=2<CR>
@@ -197,8 +199,6 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings and Movement
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-let mapleader=","                 " making the leader a comma
-let maplocalleader="\\"
 nnoremap ; :
 vmap Q gq
 nmap Q gqap
@@ -374,7 +374,7 @@ let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|log\|tmp|node_modules$',
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|^log\|tmp|node_modules$',
   \ 'file': '\.exe$\|\.so$\|\.dat|\.pyc$'
   \ }
 ""}}}
@@ -382,7 +382,7 @@ let g:ctrlp_custom_ignore = {
 " Airline {{{
 let g:airline_enabled=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='solarized'
+let g:airline_theme='jellybeans'
 set guifont=Inconsolata\ for\ Powerline
 "}}}
 

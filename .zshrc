@@ -1,18 +1,5 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-
-ZSH_THEME="joshfinnie"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
 # export MANPATH="/usr/local/man:$MANPATH"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/sbin:/usr/sbin:/sbin/opt/X11/bin:/usr/local/MacGPG2/bin"
 
 export EDITOR='vim'
 
@@ -23,19 +10,30 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 source /usr/local/bin/virtualenvwrapper.sh
 
-has_virtualenv() {
+### Auto activate virtualenvs
+function has_virtualenv() {
     if [ -e .venv ]; then
         workon `cat .venv`
     fi
 }
-
-venv_cd() {
+function venv_cd() {
     cd "$@" && has_virtualenv
 }
-
 alias cd="venv_cd"
 
-export PATH="/usr/local/bin:$PATH"
+### Hub Shortcut
+function hubpr() {
+    hub pull-request -b Trackmaven:$3 -h TrackMaven:$1 -i $2
+}
+function pr() {
+    if [ "$2" != "" ]
+    then
+        hubpr `git rev-parse --abbrev-ref HEAD` $1 $2
+    else
+        hubpr `git rev-parse --abbrev-ref HEAD` $1 master
+    fi
+}
+
 
 ### Adding location for NPM with Homebrew Node
 export NODE_PATH="/usr/local/lib/node"
@@ -67,3 +65,20 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 export VM_MEMORY=4096
 
 export TERM="screen-256color"
+
+function powerline_precmd() {
+    export PS1="$(~/powerline-shell.py $? --shell zsh 2> /dev/null)
+ %B$%b "
+}
+
+function install_powerline_precmd() {
+    for s in "${precmd_functions[@]}"; do
+        
+        if [ "$s" = "powerline_precmd" ]; then
+            return
+        fi
+    done
+    precmd_functions+=(powerline_precmd)
+}
+
+install_powerline_precmd

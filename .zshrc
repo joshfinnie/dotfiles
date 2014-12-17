@@ -65,20 +65,3 @@ export ANDROID_HOME=/usr/local/opt/android-sdk
 export VM_MEMORY=4096
 
 export TERM="screen-256color"
-
-function powerline_precmd() {
-    export PS1="$(~/powerline-shell.py $? --shell zsh 2> /dev/null)
- %B$%b "
-}
-
-function install_powerline_precmd() {
-    for s in "${precmd_functions[@]}"; do
-        
-        if [ "$s" = "powerline_precmd" ]; then
-            return
-        fi
-    done
-    precmd_functions+=(powerline_precmd)
-}
-
-install_powerline_precmd

@@ -13,7 +13,11 @@ set nocompatible                  " sets vi capatiblity to no
 syntax enable                     " enables syntax processing
 set t_Co=256
 set termencoding=utf-8
-colorscheme jellybeans
+if has('gui_running')
+    colorscheme desertEx
+else
+    colorscheme jellybeans
+endif
 highlight Normal ctermfg=grey ctermbg=black
 let mapleader=","                 " making the leader a comma
 let maplocalleader="\\"

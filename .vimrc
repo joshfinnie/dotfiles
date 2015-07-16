@@ -41,7 +41,7 @@ Plugin 'amirh/HTML-AutoCloseTag'
 Plugin 'bling/vim-airline'
 Plugin 'gregsexton/MatchTag'
 Plugin 'kien/ctrlp.vim'
-Plugin 'klen/python-mode'
+Plugin 'nvie/vim-flake8'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
@@ -76,6 +76,10 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets'
+"}}}
+
+" Fun Things {{{
+Plugin 'ryanss/vim-hackernews'
 "}}}
 
 call vundle#end()
@@ -398,10 +402,9 @@ endif
 set guifont=Inconsolata\ for\ Powerline
 "}}}
 
-" PyMode {{{
-let g:pymode_folding = 0
-autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+" flake8 {{{
+autocmd BufWritePost *.py call Flake8()
+let g:flake8_show_in_gutter=1
 "}}}
 
 " TagBar {{{

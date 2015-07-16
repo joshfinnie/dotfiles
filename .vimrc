@@ -2,7 +2,7 @@
 "
 " PERSONAL .vimrc FILE
 " Maintained by Josh Finnie
-" Last updated: 07 Feb 2014
+" Last updated: 16 Jul 2015
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -14,7 +14,7 @@ syntax enable                     " enables syntax processing
 set t_Co=256
 set termencoding=utf-8
 if has('gui_running')
-    colorscheme desertEx
+    colorscheme hybrid_material
 else
     colorscheme jellybeans
 endif
@@ -390,7 +390,11 @@ let g:ctrlp_custom_ignore = {
 " Airline {{{
 let g:airline_enabled=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='jellybeans'
+if has('gui_running')
+    let g:airline_theme='hybrid'
+else
+    let g:airline_theme='jellybeans'
+endif
 set guifont=Inconsolata\ for\ Powerline
 "}}}
 

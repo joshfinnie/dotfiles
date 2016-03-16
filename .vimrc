@@ -14,9 +14,9 @@ syntax enable                     " enables syntax processing
 set t_Co=256
 set termencoding=utf-8
 if has('gui_running')
-    colorscheme hybrid_material
+    colorscheme Tomorrow-Night-Eighties
 else
-    colorscheme jellybeans
+    colorscheme Tomorrow-Night-Eighties
 endif
 highlight Normal ctermfg=grey ctermbg=black
 let mapleader=","                 " making the leader a comma
@@ -38,10 +38,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Raimondi/delimitMate'
 Plugin 'airblade/vim-rooter'
 Plugin 'amirh/HTML-AutoCloseTag'
-Plugin 'bling/vim-airline'
+Plugin 'itchyny/lightline.vim'
 Plugin 'gregsexton/MatchTag'
 Plugin 'kien/ctrlp.vim'
-Plugin 'nvie/vim-flake8'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
@@ -98,7 +97,7 @@ set encoding=utf-8
 set hidden
 set history=1000
 set laststatus=2
-set lazyredraw                    " redray only when needed
+set lazyredraw                    " redraw only when needed
 set linebreak
 set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
@@ -283,7 +282,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 nnoremap <leader>r :bufdo e<cr>
 
 " Create links in Markdown
-nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela(http://)<esc>ha
+nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela()<esc>ha
 
 " }}}
 
@@ -365,6 +364,10 @@ augroup END
 au BufRead,BufNewFile *.template setfiletype html
 "}}}
 
+" ES6 {{{
+au BufRead,BufNewFile *.es6 setfiletype javascript
+"}}}
+
 " Generic {{{
 " Autoclose NERDTree if it's the only window left open.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -377,8 +380,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 " NerdTree {{{
 map <C-n> :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeIgnore = ['\.pyc$', '\.DS_Store$']
 let NERDTreeWinSize = 50
+let NERDTreeShowHidden=1
 "}}}
 
 " CtrlP {{{
@@ -392,23 +396,35 @@ let g:ctrlp_custom_ignore = {
 ""}}}
 
 " Airline {{{
-let g:airline_enabled=1
-let g:airline_powerline_fonts=1
-if has('gui_running')
-    let g:airline_theme='hybrid'
-else
-    let g:airline_theme='jellybeans'
-endif
 set guifont=Inconsolata\ for\ Powerline
+let g:lightline = {
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
 "}}}
 
-" flake8 {{{
-autocmd BufWritePost *.py call Flake8()
-let g:flake8_show_in_gutter=1
+" Gitgutter {{{
+let g:gitgutter_sign_column_always=1
 "}}}
 
 " TagBar {{{
 nnoremap <leader>tb :TagbarToggle<cr>
+"}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_javascript_checkers = ['eslint']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
 "}}}
 
 "}}}

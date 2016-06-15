@@ -1,5 +1,8 @@
+# Path to your oh-my-zsh configuration.        
+ZSH_THEME="af-magic"
+
 # export MANPATH="/usr/local/man:$MANPATH"
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/sbin:/usr/sbin:/sbin/opt/X11/bin:/usr/local/MacGPG2/bin"
+export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/sbin:/usr/sbin"
 
 export EDITOR='vim'
 

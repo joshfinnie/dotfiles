@@ -68,6 +68,7 @@ Plugin 'othree/html5-syntax.vim'
 Plugin 'tpope/vim-markdown'
 Plugin 'scrooloose/syntastic'
 Plugin 'lilydjwg/colorizer'
+Plugin 'flazz/vim-colorschemes'
 "}}}
 
 " SnipMate {{{

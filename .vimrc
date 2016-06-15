@@ -1,5 +1,4 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PERSONAL .vimrc FILE
 " Maintained by Josh Finnie
 " Last updated: 16 Jul 2015
@@ -14,9 +13,9 @@ syntax enable                     " enables syntax processing
 set t_Co=256
 set termencoding=utf-8
 if has('gui_running')
-    colorscheme Tomorrow-Night-Eighties
+    colorscheme Tomorrow
 else
-    colorscheme Tomorrow-Night-Eighties
+    colorscheme Tomorrow
 endif
 highlight Normal ctermfg=grey ctermbg=black
 let mapleader=","                 " making the leader a comma
@@ -55,6 +54,7 @@ Plugin 'mileszs/ack.vim'
 "}}}
 
 " Syntax Highlighting {{{
+Plugin 'leafgarland/typescript-vim'
 Plugin 'dart-lang/dart-vim-plugin'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'fatih/vim-go'
@@ -426,6 +426,10 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
+"}}}
+
+" Typescript-Vim {{{
+let g:typescript_indent_disable = 1
 "}}}
 
 "}}}

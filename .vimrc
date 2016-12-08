@@ -1,23 +1,26 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PERSONAL .vimrc FILE
 " Maintained by Josh Finnie
-" Last updated: 16 Jul 2015
+" Last updated: 08 Dec 2016
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Preamble
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-set nocompatible                  " sets vi capatiblity to no
+if 0 | endif
+if &compatible
+    " Be iMproved
+    set nocompatible
+endif
 syntax enable                     " enables syntax processing
 set t_Co=256
 set termencoding=utf-8
 if has('gui_running')
-    colorscheme Tomorrow
+    colorscheme Tomorrow-Night-Eighties
 else
-    colorscheme Tomorrow
+    colorscheme Tomorrow-Night-Eighties
 endif
-highlight Normal ctermfg=grey ctermbg=black
 let mapleader=","                 " making the leader a comma
 let maplocalleader="\\"
 
@@ -34,63 +37,107 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Plugins {{{
-Plugin 'Raimondi/delimitMate'
-Plugin 'airblade/vim-rooter'
-Plugin 'amirh/HTML-AutoCloseTag'
-Plugin 'itchyny/lightline.vim'
-Plugin 'gregsexton/MatchTag'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'itchyny/lightline.vim'  " status bar
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'tomtom/vimtlib'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/Align'
 Plugin 'tpope/vim-commentary'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'jmcantrell/vim-virtualenv'
-Plugin 'mileszs/ack.vim'
+Plugin 'tpope/vim-surround'
 "}}}
 
 " Syntax Highlighting {{{
-Plugin 'leafgarland/typescript-vim'
-Plugin 'dart-lang/dart-vim-plugin'
+Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'fatih/vim-go'
-Plugin 'groenewege/vim-less'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'jiangmiao/simple-javascript-indenter'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'othree/html5-syntax.vim'
-Plugin 'tpope/vim-markdown'
-Plugin 'scrooloose/syntastic'
-Plugin 'lilydjwg/colorizer'
 Plugin 'flazz/vim-colorschemes'
-"}}}
-
-" SnipMate {{{
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-"}}}
-
-" Fun Things {{{
-Plugin 'ryanss/vim-hackernews'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'lilydjwg/colorizer'
+Plugin 'tpope/vim-markdown'
+Plugin 'vim-syntastic/syntastic'
 "}}}
 
 call vundle#end()
-filetype plugin indent on         " load file-type specific indent files
+
+" load file-type specific indent files
+filetype plugin indent on
 " }}}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Specific Stuff
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
+" NerdTree {{{
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\.pyc$', '\.DS_Store$']
+let NERDTreeWinSize = 50
+let NERDTreeShowHidden=1
+"}}}
+
+" CtrlP {{{
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|^log\|tmp|node_modules$',
+  \ 'file': '\.exe$\|\.so$\|\.dat|\.pyc$'
+  \ }
+""}}}
+
+" Airline {{{
+set guifont=Inconsolata\ for\ Powerline
+let g:lightline = {
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'separator': { 'left': '', 'right': '' },
+  \ 'subseparator': { 'left': '', 'right': '' }
+  \ }
+"}}}
+
+" Gitgutter {{{
+let g:gitgutter_sign_column_always=1
+"}}}
+
+" TagBar {{{
+nnoremap <leader>tb :TagbarToggle<cr>
+"}}}
+
+" Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_python_checkers = ['flake8']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 1
+
+let g:syntastic_error_symbol = '💩'
+" let g:syntastic_error_symbol = '❌'
+let g:syntastic_warning_symbol = '⚠️'
+
+highlight link SyntasticErrorSign SignColumn
+highlight link SyntasticWarningSign SignColumn
+"}}}
+
+" Typescript-Vim {{{
+let g:typescript_indent_disable = 1
+"}}}
+
+"}}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-
-set autoindent
 set autoread
 set autowriteall
 set backspace=indent,eol,start
@@ -98,23 +145,22 @@ set encoding=utf-8
 set hidden
 set history=1000
 set laststatus=2
-set lazyredraw                    " redraw only when needed
+set lazyredraw
 set linebreak
-set nolist
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 set matchtime=3
 set modeline
 set modelines=5
 set mouse=a
 set noerrorbells
+set nolist
 set notimeout
-set number                        " show line numbers
+set number
 set relativenumber
 set ruler
 set shiftround
-set shiftwidth=4
-set showcmd                       " show command in bottom bar
-set showmatch                     " highlights matching [{()}]
+set showcmd
+set showmatch
 set showmode
 set splitbelow
 set splitright
@@ -129,7 +175,7 @@ set undolevels=1000
 set undoreload=10000
 set visualbell
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/**,*.pyc,*/.bower-cache/**,*/.sass-cache/**
-set wildmenu                      " visual autocomplete for command menu
+set wildmenu
 set wrap
 set wrapmargin=0
 
@@ -138,16 +184,18 @@ set wrapmargin=0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabs, Spaces & ColorColumn
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-set tabstop=4                     " number of visual spaces per TAB is 4
-set softtabstop=4                 " number of spaces in tabs while editing is 4
-set expandtab                     " tabs are saved as spaces
+set autoindent
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 
-autocmd Filetype python setlocal ts=4 sts=4 sw=4 colorcolumn=80
+autocmd Filetype css setlocal ts=2 sts=2 sw=2
+autocmd Filetype go setlocal ts=8 sts=8 sw=8
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Filetype jade setlocal ts=2 sts=2 sw=2
-autocmd Filetype css setlocal ts=2 sts=2 sw=2
-autocmd Filetype go setlocal ts=8 sts=8 sw=8
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 colorcolumn=80
 
 highlight ColorColumn ctermbg=grey
 nnoremap <leader>cc :setlocal colorcolumn=80<CR>
@@ -291,9 +339,9 @@ nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela()<esc>ha
 " Searching
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 set gdefault
-set hlsearch                      " highlight matches
+set hlsearch
 set ignorecase
-set incsearch                     " search as characters are entered
+set incsearch
 set showmatch
 set smartcase
 
@@ -311,14 +359,14 @@ noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Folding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{{{
-set nofoldenable                  " diables folding on file open
+set nofoldenable
 
-set foldlevelstart=10             " closes all folds on activation
-set foldmethod=indent            " folds on code indentation
-set foldnestmax=10               " has max of 10 nested folds
+set foldlevelstart=10
+set foldmethod=indent
+set foldnestmax=10
 
-nnoremap <Space> za              " remap fold toggling to space
-vnoremap <Space> za              " remap fold toggling to space
+nnoremap <Space> za
+vnoremap <Space> za
 
 " Make zO recursively open whatever fold we're in, even if it's partially open.
 nnoremap z0 zcz0
@@ -354,13 +402,6 @@ augroup ft_vim
 augroup END
 " }}}
 
-" Javascript {{{
-augroup ft_javascript
-    au!
-    au Filetype javascript inoremap <buffer> {<cr> {}<left><cr><space><space>.<cr><esc>kA<bs>
-augroup END
-" }}}
-
 " Trackmaven {{{
 au BufRead,BufNewFile *.template setfiletype html
 "}}}
@@ -370,66 +411,8 @@ au BufRead,BufNewFile *.es6 setfiletype javascript
 "}}}
 
 " Generic {{{
-" Autoclose NERDTree if it's the only window left open.
+" Autoclose NERDTree if it's the only window left open. ** NO LONGER WORKS :-( **
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " }}}
 
 " }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Specific Stuff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-" NerdTree {{{
-map <C-n> :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$', '\.DS_Store$']
-let NERDTreeWinSize = 50
-let NERDTreeShowHidden=1
-"}}}
-
-" CtrlP {{{
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|^log\|tmp|node_modules$',
-  \ 'file': '\.exe$\|\.so$\|\.dat|\.pyc$'
-  \ }
-""}}}
-
-" Airline {{{
-set guifont=Inconsolata\ for\ Powerline
-let g:lightline = {
-  \ 'component': {
-  \   'readonly': '%{&readonly?"":""}',
-  \ },
-  \ 'separator': { 'left': '', 'right': '' },
-  \ 'subseparator': { 'left': '', 'right': '' }
-  \ }
-"}}}
-
-" Gitgutter {{{
-let g:gitgutter_sign_column_always=1
-"}}}
-
-" TagBar {{{
-nnoremap <leader>tb :TagbarToggle<cr>
-"}}}
-
-" Syntastic {{{
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_javascript_checkers = ['eslint']
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-"}}}
-
-" Typescript-Vim {{{
-let g:typescript_indent_disable = 1
-"}}}
-
-"}}}

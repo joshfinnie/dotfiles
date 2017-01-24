@@ -1,5 +1,3 @@
-source /usr/local/bin/virtualenvwrapper.sh
-
 PS1='\n\d @ \@\n\u > \w$(__git_ps1 " (Git Branch - %s)")\n\$ '
 
 ### A function to find the registrant of a domain name
@@ -16,10 +14,6 @@ export PATH="/usr/local/share/npm/bin:$PATH"
 ### Adding location for Postgres app
 export PATH="$PATH:/Applications/Postgres.app/Contents/MacOS/bin"
 
-### Using Homebrew locations for pyenv
-eval "$(pyenv init -)"
-export PYENV_ROOT=/usr/local/opt/pyenv
-
 ### Virtualenv Wrapper
 export WORKON_HOME=/usr/local/env/
 source /usr/local/bin/virtualenvwrapper.sh
@@ -29,5 +23,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
+source ~/.zprofile
 source ~/.profile
 source ~/.aliases
+source ~/.git-prompt.sh

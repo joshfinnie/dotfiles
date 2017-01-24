@@ -40,6 +40,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'itchyny/lightline.vim'  " status bar
+Plugin 'bling/vim-bufferline'  " status bar buffer tabs
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
@@ -48,6 +49,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
 "}}}
 
 " Syntax Highlighting {{{
@@ -55,6 +57,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'digitaltoad/vim-jade'
 Plugin 'fatih/vim-go'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'isRuslan/vim-es6'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'leafgarland/typescript-vim'
@@ -90,17 +93,119 @@ let g:ctrlp_custom_ignore = {
 ""}}}
 
 " Airline {{{
-set guifont=Inconsolata\ for\ Powerline
+set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline
 let g:lightline = {
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste'  ],
+  \             [ 'fugitive', 'readonly', 'filename', 'modified'  ] ],
+  \   'right': [ [ 'lineinfo'  ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype'  ]  ],
+  \ },
   \ 'component': {
   \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'component_function': {
+  \   'fugitive': 'LightlineFugitive',
+  \   'filename': 'LightlineFilename',
+  \   'fileformat': 'LightlineFileformat',
+  \   'filetype': 'LightlineFiletype',
+  \   'fileencoding': 'LightlineFileencoding',
+  \   'mode': 'LightlineMode',
   \ },
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' }
   \ }
+
+function! LightlineModified()
+  return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightlineReadonly()
+  return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightlineFilename()
+  let fname = expand('%:t')
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
+        \ fname =~ '__Gundo\|NERD_tree' ? '' :
+        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+        \ ('' != fname ? fname : '[No Name]') .
+        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+function! LightlineFugitive()
+  try
+    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+      let mark = ''  " edit here for cool mark
+      let branch = fugitive#head()
+      return branch !=# '' ? mark.branch : ''
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightlineFileencoding()
+  return winwidth(0) > 70 ? (&fenc !=# '' ? &fenc : &enc) : ''
+endfunction
+
+function! LightlineMode()
+  let fname = expand('%:t')
+  return fname == '__Tagbar__' ? 'Tagbar' :
+        \ fname == 'ControlP' ? 'CtrlP' :
+        \ fname =~ 'NERD_tree' ? 'NERDTree' :
+        \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+  return lightline#statusline(0)
+endfunction
+
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
+let g:unite_force_overwrite_statusline = 0
+let g:vimfiler_force_overwrite_statusline = 0
+let g:vimshell_force_overwrite_statusline = 0
 "}}}
 
 " Gitgutter {{{
+let g:bufferline_echo = 0
 let g:gitgutter_sign_column_always=1
 "}}}
 
@@ -123,7 +228,8 @@ let g:syntastic_check_on_wq = 1
 
 let g:syntastic_error_symbol = '💩'
 " let g:syntastic_error_symbol = '❌'
-let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_error_symbol = '💩'
+" let g:syntastic_warning_symbol = '⚠️'
 
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn

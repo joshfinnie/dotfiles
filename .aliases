@@ -13,10 +13,15 @@ alias ls='ls -AGl'
 alias edit='mvim'
 alias serve='python -m SimpleHTTPServer'
 alias ccd='clear && cd'
-alias spotify='osascript /Users/joshfinnie/src/personal/SpotifyControl/SpotifyControl.scpt'
 alias personal='cd ~/src/personal/'
 alias tm='cd ~/src/trackmaven/'
 alias killpyc='find . -name \*.pyc -delete'
 
 alias tmux="tmux -2"
 alias mux="tmuxinator"
+
+dm-up() {
+    docker-machine env default
+    eval $(docker-machine env default)
+    echo "Docker Machine in running and activated."
+}

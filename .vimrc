@@ -1,7 +1,7 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PERSONAL .vimrc FILE
 " Maintained by Josh Finnie
-" Last updated: 08 Dec 2016
+" Last updated: 23 Oct 2017
 "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -10,89 +10,62 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 if 0 | endif
 if &compatible
-    " Be iMproved
     set nocompatible
 endif
-syntax enable                     " enables syntax processing
-set t_Co=256
+syntax enable
+set background=dark
 set termencoding=utf-8
-if has('gui_running')
-    colorscheme Tomorrow-Night-Eighties
-else
-    colorscheme Tomorrow-Night-Eighties
-endif
-let mapleader=","                 " making the leader a comma
-let maplocalleader="\\"
+colorscheme srcery-drk
 
-" }}}
+let mapleader=","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vundle
+" Vim Plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
+Plug '/usr/local/opt/fzf'  " Uses FZF from Homebrew
+Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-bufferline'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'itchyny/lightline.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 
-" let Vundle manage Vundle
-Plugin 'gmarik/Vundle.vim'
-
-" Plugins {{{
-Plugin 'airblade/vim-gitgutter'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'itchyny/lightline.vim'  " status bar
-Plugin 'bling/vim-bufferline'  " status bar buffer tabs
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mattn/emmet-vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-"}}}
-
-" Syntax Highlighting {{{
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'fatih/vim-go'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'isRuslan/vim-es6'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'lilydjwg/colorizer'
-Plugin 'tpope/vim-markdown'
-Plugin 'vim-syntastic/syntastic'
-"}}}
-
-call vundle#end()
-
-" load file-type specific indent files
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'fatih/vim-go'
+Plug 'flazz/vim-colorschemes'
+Plug 'isRuslan/vim-es6'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'kchmck/vim-coffee-script'
+Plug 'leafgarland/typescript-vim'
+Plug 'lilydjwg/colorizer'
+Plug 'tpope/vim-markdown'
+Plug 'vim-syntastic/syntastic'
+call plug#end()
 filetype plugin indent on
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Specific Stuff
+" Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-" NerdTree {{{
+" NerdTree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$', '\.DS_Store$']
 let NERDTreeWinSize = 50
 let NERDTreeShowHidden=1
-"}}}
 
-" CtrlP {{{
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|^log\|tmp|node_modules$',
-  \ 'file': '\.exe$\|\.so$\|\.dat|\.pyc$'
-  \ }
-""}}}
+" FZF
+nmap <C-p> :FZF<CR>  " Maps to Ctrl+P to help with the muscle memory...
 
-" Airline {{{
+" Airline
 set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline
 let g:lightline = {
   \ 'active': {
@@ -125,8 +98,7 @@ endfunction
 
 function! LightlineFilename()
   let fname = expand('%:t')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
+  return fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
@@ -166,23 +138,6 @@ function! LightlineMode()
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-let g:ctrlp_status_func = {
-  \ 'main': 'CtrlPStatusFunc_1',
-  \ 'prog': 'CtrlPStatusFunc_2',
-  \ }
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  let g:lightline.ctrlp_regex = a:regex
-  let g:lightline.ctrlp_prev = a:prev
-  let g:lightline.ctrlp_item = a:item
-  let g:lightline.ctrlp_next = a:next
-  return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
-endfunction
-
 let g:tagbar_status_func = 'TagbarStatusFunc'
 
 function! TagbarStatusFunc(current, sort, fname, ...) abort
@@ -202,18 +157,15 @@ endfunction
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
-"}}}
 
-" Gitgutter {{{
+" Gitgutter
 let g:bufferline_echo = 0
-let g:gitgutter_sign_column_always=1
-"}}}
+set signcolumn=yes
 
-" TagBar {{{
+" TagBar
 nnoremap <leader>tb :TagbarToggle<cr>
-"}}}
 
-" Syntastic {{{
+" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -227,19 +179,12 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
 
 let g:syntastic_error_symbol = '💩'
-" let g:syntastic_error_symbol = '❌'
-let g:syntastic_error_symbol = '💩'
-" let g:syntastic_warning_symbol = '⚠️'
+let g:syntastic_warning_symbol = '❌'
+
+let g:syntastic_python_flake8_args='--ignore=E501'
 
 highlight link SyntasticErrorSign SignColumn
 highlight link SyntasticWarningSign SignColumn
-"}}}
-
-" Typescript-Vim {{{
-let g:typescript_indent_disable = 1
-"}}}
-
-"}}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
@@ -271,7 +216,6 @@ set showmode
 set splitbelow
 set splitright
 set synmaxcol=512
-set termencoding=utf-8
 set textwidth=0
 set title
 set ttimeout
@@ -313,30 +257,36 @@ nnoremap <leader>w8 :setlocal tabstop=8<CR>:setlocal shiftwidth=8<CR>
 "}}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Nice Commands
+" Folding
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-" Trailing whitespace {{{
-augroup trailing
-    au!
-    au InsertEnter * :set listchars-=trail:⌴
-    au InsertLeave * :set listchars+=trail:⌴
-augroup END
+set nofoldenable
 
-" }}}
+set foldlevelstart=10
+set foldmethod=indent
+set foldnestmax=10
 
-" Line Return {{{
-augroup line_return
-    au!
-    au BufReadPost *
-        \ if line("'\"") > 0 && line("'\"") <= line("$") |
-        \     execute 'normal! g`"zvzz' |
-        \ endif
-augroup END
+nnoremap <Space> za
+vnoremap <Space> za
 
-:au FocusLost * silent! wa        " Saves on loss of focus
+" Make zO recursively open whatever fold we're in, even if it's partially open.
+nnoremap z0 zcz0
 
-" }}}
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
 
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -359,17 +309,11 @@ endif
 if !isdirectory(expand(&directory))
     call mkdir(expand(&directory), "p")
 endif
-
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Mappings and Movement
+" Movement
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
-nnoremap ; :
-vmap Q gq
-nmap Q gqap
-nnoremap ' `
-nnoremap ` '
 
 " Disallows arrow keys
 map <up> <nop>
@@ -405,7 +349,11 @@ noremap H ^
 noremap L $
 vnoremap L g_
 nnoremap D d$
+" }}}
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 " Better way to escape out of Insert Mode
 inoremap jj <Esc>
 
@@ -438,7 +386,6 @@ nnoremap <leader>r :bufdo e<cr>
 
 " Create links in Markdown
 nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela()<esc>ha
-
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -463,62 +410,20 @@ noremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Folding
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""{{{
-set nofoldenable
-
-set foldlevelstart=10
-set foldmethod=indent
-set foldnestmax=10
-
-nnoremap <Space> za
-vnoremap <Space> za
-
-" Make zO recursively open whatever fold we're in, even if it's partially open.
-nnoremap z0 zcz0
-
-function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-" }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Filetype Specific Stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" Vim {{{
+" Vim
 augroup ft_vim
     au!
     au FileType vim setlocal foldmethod=marker
     au FileType help setlocal textwidth=78
     au BufWinEnter *.txt if &ft == 'help' | wincmd L | endif
 augroup END
-" }}}
 
-" Trackmaven {{{
+" Trackmaven
 au BufRead,BufNewFile *.template setfiletype html
-"}}}
 
-" ES6 {{{
+" ES6
 au BufRead,BufNewFile *.es6 setfiletype javascript
-"}}}
-
-" Generic {{{
-" Autoclose NERDTree if it's the only window left open. ** NO LONGER WORKS :-( **
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-" }}}
-
 " }}}

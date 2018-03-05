@@ -1,8 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PERSONAL .vimrc FILE
 " Maintained by Josh Finnie
-" Last updated: 23 Oct 2017
-"
+" Last updated: 05 Mar 2018
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -13,18 +12,20 @@ if &compatible
     set nocompatible
 endif
 syntax enable
-set background=dark
 set termencoding=utf-8
-colorscheme srcery-drk
+
+set background=dark
+colorscheme badwolf
 
 let mapleader=","
+" }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim Plug
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 filetype off
 call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'  " Uses FZF from Homebrew
+Plug '/usr/local/opt/fzf'
 Plug 'airblade/vim-gitgutter'
 Plug 'bling/vim-bufferline'
 Plug 'hynek/vim-python-pep8-indent'
@@ -32,12 +33,15 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 
+Plug 'Quramy/vim-js-pretty-template'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'fatih/vim-go'
@@ -58,6 +62,7 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 " NerdTree
 map <C-n> :NERDTreeToggle<CR>
+map <C-s> :NERDTreeFind<CR>
 let NERDTreeIgnore = ['\.pyc$', '\.DS_Store$']
 let NERDTreeWinSize = 50
 let NERDTreeShowHidden=1
@@ -98,7 +103,8 @@ endfunction
 
 function! LightlineFilename()
   let fname = expand('%:t')
-  return fname == '__Tagbar__' ? g:lightline.fname :
+  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+        \ fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
@@ -136,6 +142,23 @@ function! LightlineMode()
         \ fname == 'ControlP' ? 'CtrlP' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+let g:ctrlp_status_func = {
+  \ 'main': 'CtrlPStatusFunc_1',
+  \ 'prog': 'CtrlPStatusFunc_2',
+  \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  let g:lightline.ctrlp_regex = a:regex
+  let g:lightline.ctrlp_prev = a:prev
+  let g:lightline.ctrlp_item = a:item
+  let g:lightline.ctrlp_next = a:next
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'
@@ -426,4 +449,5 @@ au BufRead,BufNewFile *.template setfiletype html
 
 " ES6
 au BufRead,BufNewFile *.es6 setfiletype javascript
+autocmd FileType javascript JsPreTmpl html
 " }}}

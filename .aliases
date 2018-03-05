@@ -19,6 +19,8 @@ alias killpyc='find . -name \*.pyc -delete'
 alias tmux="tmux -2"
 alias mux="tmuxinator"
 
+alias ku="kubectl"
+
 dm-up() {
     docker-machine env default
     eval $(docker-machine env default)

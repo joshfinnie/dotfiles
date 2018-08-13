@@ -77,3 +77,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/joshfinnie/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/joshfinnie/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+
+# Kubectl autocomplete.
+if [ $commands[kubectl]  ]; then source <(kubectl completion zsh); fi

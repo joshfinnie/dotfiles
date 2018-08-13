@@ -15,7 +15,7 @@ syntax enable
 set termencoding=utf-8
 
 set background=dark
-colorscheme badwolf
+colorscheme hybrid_material
 
 let mapleader=","
 " }}}
@@ -52,7 +52,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'lilydjwg/colorizer'
 Plug 'tpope/vim-markdown'
-Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -76,7 +76,7 @@ let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste'  ],
   \             [ 'fugitive', 'readonly', 'filename', 'modified'  ] ],
-  \   'right': [ [ 'lineinfo'  ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype'  ]  ],
+  \   'right': [ [ 'lineinfo'  ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype'  ], [ 'ale' ]  ],
   \ },
   \ 'component': {
   \   'readonly': '%{&readonly?"":""}',
@@ -88,10 +88,24 @@ let g:lightline = {
   \   'filetype': 'LightlineFiletype',
   \   'fileencoding': 'LightlineFileencoding',
   \   'mode': 'LightlineMode',
+  \   'ale': 'LinterStatus',
   \ },
   \ 'separator': { 'left': '', 'right': '' },
   \ 'subseparator': { 'left': '', 'right': '' }
   \ }
+
+function! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
 
 function! LightlineModified()
   return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
@@ -168,15 +182,6 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
   return lightline#statusline(0)
 endfunction
 
-augroup AutoSyntastic
-  autocmd!
-  autocmd BufWritePost *.c,*.cpp call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
-endfunction
-
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
 let g:vimshell_force_overwrite_statusline = 0
@@ -188,26 +193,18 @@ set signcolumn=yes
 " TagBar
 nnoremap <leader>tb :TagbarToggle<cr>
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" Ale
+let g:ale_fixers = {
+\    'javascript': ['eslint'],
+\    'python': ['flake8']
+\}
+let g:ale_sign_error = '💩'
+let g:ale_sign_warning = '❌'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_python_flake8_args="--ignore=E501"
 
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_python_checkers = ['flake8']
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 1
-
-let g:syntastic_error_symbol = '💩'
-let g:syntastic_warning_symbol = '❌'
-
-let g:syntastic_python_flake8_args='--ignore=E501'
-
-highlight link SyntasticErrorSign SignColumn
-highlight link SyntasticWarningSign SignColumn
+highlight clear ALEErrorSign
+highlight clear ALEWarningSign
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
@@ -269,9 +266,10 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Filetype jade setlocal ts=2 sts=2 sw=2
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 colorcolumn=80
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 highlight ColorColumn ctermbg=grey
-nnoremap <leader>cc :setlocal colorcolumn=80<CR>
+nnoremap <leader>cc :setlocal colorcolumn=120<CR>
 
 " Key bindings for adjusting the tab/shift width.
 nnoremap <leader>w2 :setlocal tabstop=2<CR>:setlocal shiftwidth=2<CR>
@@ -450,4 +448,8 @@ au BufRead,BufNewFile *.template setfiletype html
 " ES6
 au BufRead,BufNewFile *.es6 setfiletype javascript
 autocmd FileType javascript JsPreTmpl html
+
+" Vue
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd Filetype vue setlocal ts=2 sts=2 sw=2
 " }}}

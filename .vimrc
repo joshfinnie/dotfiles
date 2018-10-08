@@ -265,7 +265,7 @@ autocmd Filetype go setlocal ts=8 sts=8 sw=8
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype htmldjango setlocal ts=2 sts=2 sw=2
 autocmd Filetype jade setlocal ts=2 sts=2 sw=2
-autocmd Filetype python setlocal ts=4 sts=4 sw=4 colorcolumn=80
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 colorcolumn=120
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 highlight ColorColumn ctermbg=grey

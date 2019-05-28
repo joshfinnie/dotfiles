@@ -26,3 +26,5 @@ dm-up() {
     eval $(docker-machine env default)
     echo "Docker Machine in running and activated."
 }
+
+alias dc='docker rm $(docker ps -q -f "status=exited") && docker rmi $(docker images -q -f "dangling=true") && docker volume rm $(docker volume ls -q -f "dangling=true")'

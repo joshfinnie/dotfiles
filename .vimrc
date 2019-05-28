@@ -42,8 +42,10 @@ Plug 'tpope/vim-surround'
 Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 
 Plug 'Quramy/vim-js-pretty-template'
+Plug 'ambv/black'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-jade'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'fatih/vim-go'
 Plug 'flazz/vim-colorschemes'
 Plug 'isRuslan/vim-es6'
@@ -52,6 +54,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'lilydjwg/colorizer'
 Plug 'tpope/vim-markdown'
+Plug 'udalov/kotlin-vim'
 Plug 'w0rp/ale'
 call plug#end()
 filetype plugin indent on
@@ -194,14 +197,18 @@ set signcolumn=yes
 nnoremap <leader>tb :TagbarToggle<cr>
 
 " Ale
-let g:ale_fixers = {
+let g:ale_linters = {
 \    'javascript': ['eslint'],
 \    'python': ['flake8']
 \}
 let g:ale_sign_error = '💩'
 let g:ale_sign_warning = '❌'
 let g:airline#extensions#ale#enabled = 1
-let g:ale_python_flake8_args="--ignore=E501"
+let g:ale_python_flake8_args="--ignore=E501,W503"
+let g:ale_python_black_options = '--line-length 120'
+let g:ale_fix_on_save = 1
+
+let g:black_linelength=120
 
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign

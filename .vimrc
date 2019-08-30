@@ -53,7 +53,6 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'kchmck/vim-coffee-script'
 Plug 'leafgarland/typescript-vim'
 Plug 'lilydjwg/colorizer'
-Plug 'tpope/vim-markdown'
 Plug 'udalov/kotlin-vim'
 Plug 'w0rp/ale'
 call plug#end()
@@ -199,16 +198,13 @@ nnoremap <leader>tb :TagbarToggle<cr>
 " Ale
 let g:ale_linters = {
 \    'javascript': ['eslint'],
-\    'python': ['flake8']
+\    'python': ['flake8'],
+\    'markdown': ['markdownlint']
 \}
-let g:ale_sign_error = '💩'
-let g:ale_sign_warning = '❌'
 let g:airline#extensions#ale#enabled = 1
-let g:ale_python_flake8_args="--ignore=E501,W503"
-let g:ale_python_black_options = '--line-length 120'
+let g:ale_python_flake8_options="--ignore=E501,W503"
+let g:ale_python_black_options = '-l 120'
 let g:ale_fix_on_save = 1
-
-let g:black_linelength=120
 
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
@@ -454,7 +450,7 @@ au BufRead,BufNewFile *.template setfiletype html
 
 " ES6
 au BufRead,BufNewFile *.es6 setfiletype javascript
-autocmd FileType javascript JsPreTmpl html
+autocmd FileType javascript JsPreTmpl
 
 " Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css

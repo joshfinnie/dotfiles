@@ -10,21 +10,10 @@ alias which='type -a'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ls='ls -AGl'
-alias edit='mvim'
+alias edit='vim'
 alias ccd='clear && cd'
 alias personal='cd ~/src/personal/'
 alias tm='cd ~/src/trackmaven/'
 alias killpyc='find . -name \*.pyc -delete'
 
 alias tmux="tmux -2"
-alias mux="tmuxinator"
-
-alias ku="kubectl"
-
-dm-up() {
-    docker-machine env default
-    eval $(docker-machine env default)
-    echo "Docker Machine in running and activated."
-}
-
-alias dc='docker rm $(docker ps -q -f "status=exited") && docker rmi $(docker images -q -f "dangling=true") && docker volume rm $(docker volume ls -q -f "dangling=true")'

@@ -1,11 +1,15 @@
-export ZSH=/Users/joshfinnie/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 export TERM="screen-256color"
 
 ZSH_THEME="bullet-train"
 ZSH_TMUX_AUTOSTART="true"
-DEFAULT_USER="joshfinnie"
+DEFAULT_USER="jjfinnie-admin"
 
-plugins+=(zsh-nvm tmux)
+plugins+=(
+    nvm
+    tmux
+    zsh-autosuggestions
+)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -26,21 +30,12 @@ export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 
 ### Adding path for NVM
-export NVM_DIR="/Users/joshfinnie/.nvm"
+export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"  # This loads nvm
 
-
-### Making sure Pyenv works
+### Command for pyenv
 eval "$(pyenv init -)"
-
-# YarnPkg
-export PATH="$PATH:$HOME/.yarn/bin"
-
-# oh-my-zsh specific aliases
-alias bower='noglob bower'
-
-# Android SDK (from Homebrew) path
-export ANDROID_HOME=/usr/local/opt/android-sdk
+export PATH="/.local/lib/python3.6:$PATH"
 
 source ~/.aliases
 source ~/.zprofile
@@ -48,15 +43,11 @@ source ~/.zprofile
 # FZF using AG
 export FZF_DEFAULT_COMMAND='ag -g ""'
 
-### Adding ZSH Autocomplete
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/joshfinnie/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/joshfinnie/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+[[ -f /Users/jfinnie-admin/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/jjfinnie-admin/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/joshfinnie/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/joshfinnie/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+[[ -f /Users/jjfinnie-admin/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/jjfinnie-admin/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
-# Kubectl autocomplete.
-if [ $commands[kubectl]  ]; then source <(kubectl completion zsh); fi
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

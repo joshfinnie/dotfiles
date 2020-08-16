@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PERSONAL .vimrc FILE
 " Maintained by Josh Finnie
-" Last updated: 05 Mar 2018
+" Last updated: 28 Jun 2020
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -15,7 +15,7 @@ syntax enable
 set termencoding=utf-8
 
 set background=dark
-colorscheme hybrid_material
+colorscheme gruvbox
 
 let mapleader=","
 " }}}
@@ -25,36 +25,19 @@ let mapleader=","
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" {{{
 filetype off
 call plug#begin('~/.vim/plugged')
-Plug '/usr/local/opt/fzf'
-Plug 'airblade/vim-gitgutter'
-Plug 'bling/vim-bufferline'
-Plug 'hynek/vim-python-pep8-indent'
-Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-startify'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-surround'
-Plug 'prettier/vim-prettier', {'do': 'yarn install'}
 
-Plug 'Quramy/vim-js-pretty-template'
-Plug 'ambv/black'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'digitaltoad/vim-jade'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'fatih/vim-go'
-Plug 'flazz/vim-colorschemes'
-Plug 'isRuslan/vim-es6'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'kchmck/vim-coffee-script'
-Plug 'leafgarland/typescript-vim'
-Plug 'lilydjwg/colorizer'
-Plug 'udalov/kotlin-vim'
-Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'preservim/nerdtree'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-fugitive'
+
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -120,7 +103,6 @@ endfunction
 function! LightlineFilename()
   let fname = expand('%:t')
   return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
         \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
         \ ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
@@ -130,7 +112,7 @@ endfunction
 
 function! LightlineFugitive()
   try
-    if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+    if expand('%:t') !~? 'Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
       let mark = ''  " edit here for cool mark
       let branch = fugitive#head()
       return branch !=# '' ? mark.branch : ''
@@ -154,8 +136,7 @@ endfunction
 
 function! LightlineMode()
   let fname = expand('%:t')
-  return fname == '__Tagbar__' ? 'Tagbar' :
-        \ fname == 'ControlP' ? 'CtrlP' :
+  return fname == 'ControlP' ? 'CtrlP' :
         \ fname =~ 'NERD_tree' ? 'NERDTree' :
         \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
@@ -177,12 +158,6 @@ function! CtrlPStatusFunc_2(str)
   return lightline#statusline(0)
 endfunction
 
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
-  return lightline#statusline(0)
-endfunction
 
 let g:unite_force_overwrite_statusline = 0
 let g:vimfiler_force_overwrite_statusline = 0
@@ -192,22 +167,49 @@ let g:vimshell_force_overwrite_statusline = 0
 let g:bufferline_echo = 0
 set signcolumn=yes
 
-" TagBar
-nnoremap <leader>tb :TagbarToggle<cr>
-
 " Ale
 let g:ale_linters = {
 \    'javascript': ['eslint'],
+\    'typescript': ['eslint'],
 \    'python': ['flake8'],
 \    'markdown': ['markdownlint']
 \}
+
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
+\   'python': ['black'],
+\}
+
 let g:airline#extensions#ale#enabled = 1
 let g:ale_python_flake8_options="--ignore=E501,W503"
 let g:ale_python_black_options = '-l 120'
-let g:ale_fix_on_save = 1
+let g:ale_fix_on_save = 0
+let g:ale_use_global_executables = 1
 
 highlight clear ALEErrorSign
 highlight clear ALEWarningSign
+
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+
+nnoremap <Leader>f :ALEFix<CR>
+
+" Goyo
+nnoremap <Leader>gy :Goyo 120<CR>
+nnoremap <Leader>gyx :Goyo<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+let g:limelight_conceal_ctermfg = 240
+
+" Gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Basic Options
@@ -243,6 +245,7 @@ set textwidth=0
 set title
 set ttimeout
 set ttimeoutlen=10
+set ttymouse=sgr
 set undofile
 set undolevels=1000
 set undoreload=10000
@@ -410,6 +413,9 @@ nnoremap <leader>r :bufdo e<cr>
 
 " Create links in Markdown
 nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela()<esc>ha
+
+" CoC Mappings
+nmap <silent> gd :vsp<cr><Plug>(coc-definition)
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -448,11 +454,18 @@ augroup END
 " Trackmaven
 au BufRead,BufNewFile *.template setfiletype html
 
-" ES6
-au BufRead,BufNewFile *.es6 setfiletype javascript
-autocmd FileType javascript JsPreTmpl
-
 " Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 autocmd Filetype vue setlocal ts=2 sts=2 sw=2
+
+" Typescript JSX
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+autocmd Filetype typescript setlocal ts=2 sts=2 sw=2
+
+" JSX
+autocmd BufNewFile,BufRead *.jsx set filetype=javascript
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+" Mdx
+autocmd BufNewFile,BufRead *.mdx set filetype=markdown
 " }}}

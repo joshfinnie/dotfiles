@@ -33,15 +33,14 @@ export PATH="$PATH:$GOPATH/bin"
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"  # This loads nvm
 
-### Command for pyenv
-eval "$(pyenv init -)"
-export PATH="/.local/lib/python3.6:$PATH"
-
 source ~/.aliases
 source ~/.zprofile
 
 # FZF using AG
 export FZF_DEFAULT_COMMAND='ag -g ""'
+
+# ASDF setup
+source $(brew --prefix asdf)/asdf.sh
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`

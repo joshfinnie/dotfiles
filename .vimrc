@@ -416,6 +416,7 @@ nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela()<esc>ha
 
 " CoC Mappings
 nmap <silent> gd :vsp<cr><Plug>(coc-definition)
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

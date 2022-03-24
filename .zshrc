@@ -1,16 +1,7 @@
-export ZSH=$HOME/.oh-my-zsh
 export TERM="screen-256color"
 
-ZSH_THEME="bullet-train"
-ZSH_TMUX_AUTOSTART="true"
 DEFAULT_USER="jjfinnie-admin"
-
-plugins+=(
-    nvm
-    tmux
-    zsh-autosuggestions
-)
-source $ZSH/oh-my-zsh.sh
+DISABLE_AUTO_TITLE="true"
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -33,14 +24,8 @@ export PATH="$PATH:$GOPATH/bin"
 export NVM_DIR="$HOME/.nvm"
 source "$NVM_DIR/nvm.sh"  # This loads nvm
 
-source ~/.aliases
-source ~/.zprofile
-
 # FZF using AG
 export FZF_DEFAULT_COMMAND='ag -g ""'
-
-# ASDF setup
-source $(brew --prefix asdf)/asdf.sh
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -50,3 +35,15 @@ source $(brew --prefix asdf)/asdf.sh
 [[ -f /Users/jjfinnie-admin/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/jjfinnie-admin/.nvm/versions/node/v6.9.2/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+source /usr/local/opt/asdf/asdf.sh
+source /usr/local/opt/asdf/libexec/asdf.sh
+
+source ~/.aliases
+source ~/.zprofile
+
+eval "$(starship init zsh)"

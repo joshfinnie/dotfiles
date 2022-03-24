@@ -9,7 +9,7 @@ alias h='history'
 alias which='type -a'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ls='ls -AGl'
+alias ls='exa -lag --header'
 alias edit='vim'
 alias ccd='clear && cd'
 alias personal='cd ~/src/personal/'
@@ -21,3 +21,5 @@ alias tmux="tmux -2"
 alias latex="docker run -v `pwd`:/tmp latex pdflatex"
 
 alias vimflict="git diff --name-only | uniq | xargs vim"
+
+alias exa="/Users/jjfinnie-admin/.asdf/installs/rust/nightly/bin/exa"

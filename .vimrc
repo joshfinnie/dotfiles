@@ -13,6 +13,7 @@ if &compatible
 endif
 syntax enable
 set termencoding=utf-8
+set encoding=UTF-8
 
 set background=dark
 colorscheme gruvbox
@@ -35,6 +36,7 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 
@@ -56,7 +58,6 @@ let NERDTreeShowHidden=1
 nmap <C-p> :FZF<CR>  " Maps to Ctrl+P to help with the muscle memory...
 
 " Airline
-set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline
 let g:lightline = {
   \ 'active': {
   \   'left': [ [ 'mode', 'paste'  ],
@@ -416,6 +417,9 @@ nnoremap <leader>l viw<esc>a]<esc>hbi[<esc>lela()<esc>ha
 
 " CoC Mappings
 nmap <silent> gd :vsp<cr><Plug>(coc-definition)
+
+" Terminal Normal Mode
+tnoremap <c-j> <c-\><c-n>
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -420,6 +420,8 @@ nmap <silent> gd :vsp<cr><Plug>(coc-definition)
 
 " Terminal Normal Mode
 tnoremap <c-j> <c-\><c-n>
+
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
 " }}}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

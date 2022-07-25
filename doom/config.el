@@ -81,10 +81,5 @@
 
 (setq rustic-lsp-server 'rust-analyzer)
 
-(map! :leader
-      :desc "Open treemacs"
-      "n n" #'treemacs)
-
 (after! dtrt-indent
     (add-to-list 'dtrt-indent-hook-mapping-list '(typescript-mode javascript typescript-indent-level)))
-

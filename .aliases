@@ -1,5 +1,4 @@
 # My Aliases
-
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -10,16 +9,15 @@ alias which='type -a'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ls='exa -lag --header'
-alias edit='vim'
 alias ccd='clear && cd'
-alias personal='cd ~/src/personal/'
-alias tm='cd ~/src/trackmaven/'
-alias killpyc='find . -name \*.pyc -delete'
 
-alias tmux="tmux -2"
+alias killpyc='find . -name \*.pyc -delete'
 
 alias latex="docker run -v `pwd`:/tmp latex pdflatex"
 
 alias vimflict="git diff --name-only | uniq | xargs vim"
 
-alias exa="/Users/jjfinnie-admin/.asdf/installs/rust/nightly/bin/exa"
+alias exa="/opt/homebrew/bin/exa"
+
+alias e="open -a /Applications/Emacs.app &"
+alias v="nvim"

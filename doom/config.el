@@ -83,3 +83,12 @@
 
 (after! dtrt-indent
     (add-to-list 'dtrt-indent-hook-mapping-list '(typescript-mode javascript typescript-indent-level)))
+
+(after! flycheck
+  (map! :leader
+        (:prefix-map ("c" . "code")
+         "x" flycheck-command-map)))
+
+;; -- Neotree --
+(doom-themes-neotree-config)
+(setq doom-themes-neotree-file-icons t)

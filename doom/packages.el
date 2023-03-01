@@ -9,7 +9,6 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 
-;; Javascript/Typescrit
 (package! typescript-mode)
 (package! prettier-js)
 (package! dockerfile-mode)
@@ -19,6 +18,7 @@
 (package! solidity-mode)
 (package! olivetti)
 (package! dracula-theme)
+(package! prisma-mode :recipe (:host github :repo "pimeys/emacs-prisma-mode" :branch "main"))
 
 ;; To install a package directly from a remote git repo, you must specify a
 ;; `:recipe'. You'll find documentation on what `:recipe' accepts here:

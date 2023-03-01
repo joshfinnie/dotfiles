@@ -79,8 +79,6 @@
 (after! typescript-mode
     (add-hook 'typescript-mode-hook #'flycheck-mode))
 
-(setq rustic-lsp-server 'rust-analyzer)
-
 (after! dtrt-indent
     (add-to-list 'dtrt-indent-hook-mapping-list '(typescript-mode javascript typescript-indent-level)))
 

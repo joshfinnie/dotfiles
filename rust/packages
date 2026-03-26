@@ -1,0 +1,11 @@
+# cargo global packages (one per line, # for comments)
+cargo-generate
+cargo-watch
+cargo-release
+cargo-sqlx
+cargo-install-update
+dx
+s3-archiver-cli
+sqlx
+trunk
+wasm-pack

@@ -1,0 +1,3 @@
+# npm global packages (one per line, # for comments)
+@ionic/cli
+pnpm

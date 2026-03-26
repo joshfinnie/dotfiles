@@ -1,0 +1,6 @@
+# go global packages (one per line, # for comments)
+github.com/air-verse/air@latest
+github.com/oapi-codegen/oapi-codegen/v2/cmd/oapi-codegen@latest
+github.com/xataio/pgroll@latest
+honnef.co/go/tools/cmd/staticcheck@latest
+github.com/a-h/templ/cmd/templ@latest

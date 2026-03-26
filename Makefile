@@ -1,6 +1,7 @@
 DOTFILES := $(shell pwd)
 
-.PHONY: all bash zsh fish tmux vim nvim js
+.PHONY: all bash zsh fish tmux vim nvim js wezterm \
+        packages homebrew-packages node-packages python-packages rust-packages go-packages
 
 all: bash zsh fish tmux vim nvim js wezterm
 
@@ -50,3 +51,23 @@ js:
 
 wezterm:
 	$(call symlink,$(DOTFILES)/wezterm,$(HOME)/.config/wezterm)
+
+# packages
+
+packages: homebrew-packages node-packages python-packages rust-packages go-packages
+
+homebrew-packages:
+	@grep -v '^\s*#' $(DOTFILES)/homebrew/packages | grep -v '^\s*$$' | xargs brew install
+	@grep -v '^\s*#' $(DOTFILES)/homebrew/casks    | grep -v '^\s*$$' | xargs brew install --cask
+
+node-packages:
+	@grep -v '^\s*#' $(DOTFILES)/node/packages | grep -v '^\s*$$' | xargs npm install -g
+
+python-packages:
+	@grep -v '^\s*#' $(DOTFILES)/python/packages | grep -v '^\s*$$' | xargs pip install
+
+rust-packages:
+	@grep -v '^\s*#' $(DOTFILES)/rust/packages | grep -v '^\s*$$' | while read pkg; do cargo install $$pkg; done
+
+go-packages:
+	@grep -v '^\s*#' $(DOTFILES)/go/packages | grep -v '^\s*$$' | while read pkg; do go install $$pkg; done

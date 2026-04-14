@@ -1,3 +1,3 @@
 function lsa
-    exa -lag --header $argv
+    eza -lag --header $argv
 end

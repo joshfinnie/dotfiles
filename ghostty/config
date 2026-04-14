@@ -1,0 +1,21 @@
+font-family = "CommitMono Nerd Font Mono"
+font-size = 14
+
+theme = Dracula
+
+shell-integration = fish
+
+window-decoration = false
+window-theme = dark
+
+cursor-style = block
+cursor-style-blink = false
+cursor-click-to-move = true
+
+clipboard-paste-protection = true
+copy-on-select = true
+selection-background = #44475a
+selection-foreground = #f8f8f2
+mouse-scroll-multiplier = 3
+selection-word-chars = "-_:@."
+resize-overlay = never

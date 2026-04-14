@@ -1,9 +1,9 @@
 DOTFILES := $(shell pwd)
 
-.PHONY: all bash zsh fish tmux vim nvim js wezterm \
+.PHONY: all bash zsh fish tmux vim nvim js wezterm zellij ghostty \
         packages homebrew-packages node-packages python-packages rust-packages go-packages
 
-all: bash zsh fish tmux vim nvim js wezterm
+all: bash zsh fish tmux vim nvim js wezterm zellij ghostty
 
 # Usage: $(call symlink,src,dst)
 define symlink
@@ -34,6 +34,7 @@ zsh:
 fish:
 	$(call symlink,$(DOTFILES)/fish/config.fish,$(HOME)/.config/fish/config.fish)
 	$(call symlink,$(DOTFILES)/fish/fish_variables,$(HOME)/.config/fish/fish_variables)
+	$(call symlink,$(DOTFILES)/fish/fish_plugins,$(HOME)/.config/fish/fish_plugins)
 	$(call symlink,$(DOTFILES)/fish/conf.d,$(HOME)/.config/fish/conf.d)
 	$(call symlink,$(DOTFILES)/fish/functions,$(HOME)/.config/fish/functions)
 
@@ -51,6 +52,14 @@ js:
 
 wezterm:
 	$(call symlink,$(DOTFILES)/wezterm,$(HOME)/.config/wezterm)
+
+zellij:
+	$(call symlink,$(DOTFILES)/zellij,$(HOME)/.config/zellij)
+	@curl -fsSL https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm \
+		-o $(DOTFILES)/zellij/plugins/zjstatus.wasm
+
+ghostty:
+	$(call symlink,$(DOTFILES)/ghostty/config,$(HOME)/.config/ghostty/config)
 
 # packages
 

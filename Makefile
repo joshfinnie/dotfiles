@@ -1,15 +1,21 @@
 DOTFILES := $(shell pwd)
 
-.PHONY: all bash zsh fish tmux vim nvim js wezterm zellij ghostty \
+.PHONY: all bash zsh fish tmux vim nvim js wezterm zellij ghostty herdr claude codex antigravity \
         packages homebrew-packages node-packages python-packages rust-packages go-packages
 
-all: bash zsh fish tmux vim nvim js wezterm zellij ghostty
+all: bash zsh fish tmux vim nvim js wezterm zellij ghostty herdr claude codex antigravity
 
 # Usage: $(call symlink,src,dst)
 define symlink
 	@mkdir -p $$(dirname $(2))
 	@if [ -L $(2) ]; then \
-		echo "already linked: $(2)"; \
+		if [ "$$(readlink $(2))" = "$(1)" ]; then \
+			echo "already linked: $(2)"; \
+		else \
+			rm $(2); \
+			ln -s $(1) $(2); \
+			echo "relinked: $(2)"; \
+		fi; \
 	elif [ -e $(2) ]; then \
 		echo "backing up: $(2) -> $(2).bak"; \
 		mv $(2) $(2).bak; \
@@ -61,13 +67,31 @@ zellij:
 ghostty:
 	$(call symlink,$(DOTFILES)/ghostty/config,$(HOME)/.config/ghostty/config)
 
+herdr:
+	$(call symlink,$(DOTFILES)/herdr/config.toml,$(HOME)/.config/herdr/config.toml)
+
+claude:
+	$(call symlink,$(DOTFILES)/ai_agents/AGENTS.md,$(HOME)/.claude/CLAUDE.md)
+	$(call symlink,$(DOTFILES)/ai_agents/skills,$(HOME)/.claude/skills)
+	$(call symlink,$(DOTFILES)/ai_agents/AGENTS.md,$(HOME)/AGENTS.md)
+
+codex:
+	$(call symlink,$(DOTFILES)/ai_agents/skills,$(HOME)/.codex/skills)
+
+antigravity:
+	$(call symlink,$(DOTFILES)/ai_agents/skills,$(HOME)/.gemini/antigravity/skills)
+
 # packages
 
 packages: homebrew-packages node-packages python-packages rust-packages go-packages
 
 homebrew-packages:
+ifeq ($(shell uname),Darwin)
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/packages | grep -v '^\s*$$' | xargs brew install
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/casks    | grep -v '^\s*$$' | xargs brew install --cask
+else
+	@echo "skipping homebrew-packages: macOS only"
+endif
 
 node-packages:
 	@grep -v '^\s*#' $(DOTFILES)/node/packages | grep -v '^\s*$$' | xargs npm install -g

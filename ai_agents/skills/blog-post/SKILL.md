@@ -1,11 +1,13 @@
 ---
 name: blog-post
-description: Use when writing, drafting, or editing a blog post for joshfinnie.com. Covers voice (I vs we), formatting rules, banned AI-isms, structure, file format (.md vs .mdx), and the pre-done Vale lint check. Triggers on "write a blog post", "draft a post", "new post about X", or editing an existing post in src/content/.
+description: Use when writing, drafting, or editing a blog post for joshfinnie.com. Covers voice (I vs we), formatting rules, blog-specific banned phrases, structure, file format (.md vs .mdx), and the pre-done Vale lint check. Builds on the humanize-writing skill for the general AI-pattern sweep. Triggers on "write a blog post", "draft a post", "new post about X", or editing an existing post in src/content/.
 user-invocable: true
 argument-hint: "[topic or outline]"
 ---
 
 Writing a post for this blog follows a fixed style. Do not skip steps or ask about preferences already fixed by this skill; only the voice question below needs the user's input.
+
+Invoke the `humanize-writing` skill for the general AI-pattern sweep (mechanical transitions, buzzwords, hedging, uniform rhythm, the guardrails on over-editing, and so on) — it applies to every post. This skill only adds what's specific to joshfinnie.com on top of that: voice, frontmatter, structure, the Bluesky closing, and the blog's own banned phrases and Vale gate below.
 
 ## Before writing
 
@@ -42,8 +44,7 @@ Cover each topic as its own H2 or H3 section. Prose paragraphs only, no bullet l
 
 1. Short intro (2-3 sentences) establishing why the topic matters
 2. Body sections covering the outline
-3. A closing section that summarizes the key takeaways in prose form
-4. Final line: `find me on [**Bluesky**](https://bsky.app/profile/joshfinnie.dev)`
+3. A closing section that summarizes the key takeaways in prose form. End that section's last paragraph with a Bluesky callout worked inline as its final sentence, not on its own line, and phrased as a specific invitation tied to the post's topic rather than a generic sign-off, e.g. "Have you switched to Herdr? Let's chat on [**Bluesky**](https://bsky.app/profile/joshfinnie.dev)." or "Find me on [**Bluesky**](https://bsky.app/profile/joshfinnie.dev) and let me know what you think." The link text stays `Bluesky`, bolded; only the surrounding invitation changes per post.
 
 ## Formatting rules
 
@@ -52,11 +53,11 @@ Cover each topic as its own H2 or H3 section. Prose paragraphs only, no bullet l
 - No bullet lists. Convert any list to flowing prose.
 - Target a high Flesch reading ease score: short sentences, common words, active voice.
 
-## Avoid AI-isms
+## Blog-specific banned phrases
 
-Never use: "dive into" / "delve into", "in today's world" / "in the modern era", "it's worth noting", "it's important to understand", "seamlessly", "robust", "leverage" (as a verb), "cutting-edge" / "game-changer", "navigate" (metaphorical), "landscape" / "ecosystem" (metaphorical), "furthermore" / "additionally" / "moreover" as sentence openers, "in conclusion" / "in summary", rhetorical questions to open sections.
+On top of the general blacklist in `humanize-writing`, this blog specifically never uses: "dive into" / "delve into", "navigate" (metaphorical), "landscape" / "ecosystem" (metaphorical), "cutting-edge" / "game-changer", "in the modern era".
 
-Also avoid: starting multiple sentences in a row with "This", passive voice where active works fine, filler transition sentences that restate what was just said.
+Also avoid starting multiple sentences in a row with "This" — a tic specific to this blog's drafts that's worth watching for even after the general sweep.
 
 ## Before calling it done
 

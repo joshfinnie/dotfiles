@@ -1,0 +1,20 @@
+name = "web"
+description = "web monorepo"
+working_dir = "~/src/web"
+
+[[tabs]]
+name = "main"
+
+[[tabs.panes]]
+command = "claude"
+
+[[tabs.panes]]
+command = "lazygit"
+split = "right"
+
+[[tabs.panes]]
+split = "down"
+
+[[tabs]]
+name = "nvim"
+command = "nvim"

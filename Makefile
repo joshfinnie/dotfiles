@@ -69,6 +69,7 @@ ghostty:
 
 herdr:
 	$(call symlink,$(DOTFILES)/herdr/config.toml,$(HOME)/.config/herdr/config.toml)
+	$(call symlink,$(DOTFILES)/herdr/projects,$(HOME)/.config/herdr/plugins/config/cloudmanic.herdr-plus/projects)
 
 claude:
 	$(call symlink,$(DOTFILES)/ai_agents/AGENTS.md,$(HOME)/.claude/CLAUDE.md)

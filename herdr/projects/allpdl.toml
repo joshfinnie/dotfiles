@@ -1,0 +1,20 @@
+name = "allpdl"
+description = "allpdl"
+working_dir = "~/src/allpdl"
+
+[[tabs]]
+name = "main"
+
+[[tabs.panes]]
+command = "claude"
+
+[[tabs.panes]]
+command = "lazygit"
+split = "right"
+
+[[tabs.panes]]
+split = "down"
+
+[[tabs]]
+name = "nvim"
+command = "nvim"

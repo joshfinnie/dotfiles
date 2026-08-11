@@ -5,6 +5,8 @@
 - Always use **pnpm** for Node.js/JavaScript projects.
   Never use `npm` or `yarn` unless the project explicitly requires it (e.g., a `package-lock.json` with no `pnpm-lock.yaml`).
 
+## Overall Recommendations
+
 - Never use the em dash "—".
 - When writing commit messages, NEVER auto-add your agent name as co-author
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
@@ -17,3 +19,14 @@
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness.
   If you see one, even if it is not caused by what you are working on right now, still get it fixed.
 - Do NOT add arbitrary or redundant comments to code.
+
+## Context and Tool Use
+
+- Narrow reads with deterministic CLI tools.
+- Use `rg -n <pattern> <path>` for exact matches.
+- Read only relevant symbols or line ranges.
+- Review edits with `git diff -- <path>`.
+- Prefer syntax-aware tools for bulk edits.
+- Use `ast-grep` for structural rewrites.
+- Use `fastmod` for safe string replacements.
+- Use `repomap.md` if available.

@@ -5,3 +5,5 @@ abbr mkdir "mkdir -p"
 abbr h "history"
 abbr which "type -a"
 abbr ls "eza -lag --header"
+
+abbr gemini "agy"

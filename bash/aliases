@@ -8,7 +8,7 @@ alias h='history'
 alias which='type -a'
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ls='exa -lag --header'
+alias ls='eza -lag --header'
 alias ccd='clear && cd'
 
 alias killpyc='find . -name \*.pyc -delete'
@@ -17,7 +17,7 @@ alias latex="docker run -v `pwd`:/tmp latex pdflatex"
 
 alias vimflict="git diff --name-only | uniq | xargs vim"
 
-alias exa="/opt/homebrew/bin/exa"
+alias eza="/opt/homebrew/bin/eza"
 
 alias e="open -a /Applications/Emacs.app &"
 alias v="nvim"

@@ -27,3 +27,7 @@ source ~/.zprofile
 source ~/.profile
 source ~/.aliases
 source ~/.git-prompt.sh
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/josh/.local/bin:$PATH"

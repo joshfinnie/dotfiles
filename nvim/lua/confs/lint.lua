@@ -5,9 +5,8 @@ lint.linters_by_ft = {
 	typescript = { "eslint_d" },
 	javascriptreact = { "eslint_d" },
 	typescriptreact = { "eslint_d" },
-	go = { "golangcilint" },
 	yaml = { "yamllint" },
-	markdown = { "markdownlint" },
+	markdown = { "markdownlint-cli2" },
 }
 
 vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {

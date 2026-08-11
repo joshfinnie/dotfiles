@@ -1,8 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export DEV_PDL_REDIS:REDACTED\x3a6379
-SETUVAR --export PROD_PDL_REDIS:REDACTED\x3a6379
-SETUVAR --export STAGING_PDL_REDIS:REDACTED\x3a6379
 SETUVAR __fish_initialized:3800
 SETUVAR _fish_abbr_cp:cp\x20\x2di
 SETUVAR _fish_abbr_eza:
@@ -12,6 +9,7 @@ SETUVAR _fish_abbr_mkdir:mkdir\x20\x2dp
 SETUVAR _fish_abbr_mv:mv\x20\x2di
 SETUVAR _fish_abbr_rm:rm\x20\x2di
 SETUVAR _fish_abbr_which:type\x20\x2da
+SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:555\x1ebrblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:blue

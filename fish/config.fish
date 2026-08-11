@@ -39,3 +39,7 @@ if status is-interactive
     end
 
 end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/Users/josh/.local/bin" $PATH

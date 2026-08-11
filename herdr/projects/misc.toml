@@ -1,0 +1,20 @@
+name = "misc"
+description = "misc"
+working_dir = "~"
+
+[[tabs]]
+name = "main"
+
+[[tabs.panes]]
+command = "claude"
+
+[[tabs.panes]]
+command = "lazygit"
+split = "right"
+
+[[tabs.panes]]
+split = "down"
+
+[[tabs]]
+name = "nvim"
+command = "nvim"

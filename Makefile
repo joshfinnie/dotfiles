@@ -70,6 +70,15 @@ ghostty:
 herdr:
 	$(call symlink,$(DOTFILES)/herdr/config.toml,$(HOME)/.config/herdr/config.toml)
 	$(call symlink,$(DOTFILES)/herdr/projects,$(HOME)/.config/herdr/plugins/config/cloudmanic.herdr-plus/projects)
+	# herdr-agent-quota runs from a local fork (github.com:joshfinnie/herdr-agent-quota,
+	# branch claude-multi-account) that fixes concurrent Claude accounts sharing one
+	# quota row. Clone it to ~/src/p/herdr-agent-quota, `cargo build --release`, then:
+	#   herdr plugin link ~/src/p/herdr-agent-quota --enabled
+	#   herdr plugin action invoke herdr-agent-quota.configure
+	# Repeat the work profile's statusLine/session hooks with:
+	#   CLAUDE_SETTINGS_FILE=~/.claude-work/settings.json HERDR_PLUGIN_STATE_DIR=~/.local/state/herdr/plugins/herdr-agent-quota \
+	#     ~/src/p/herdr-agent-quota/target/release/herdr-agent-quota configure --apply
+	#   CLAUDE_CONFIG_DIR=~/.claude-work herdr integration install claude
 
 claude:
 	$(call symlink,$(DOTFILES)/ai_agents/AGENTS.md,$(HOME)/.claude/CLAUDE.md)

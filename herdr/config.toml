@@ -154,13 +154,18 @@ description = "refresh all agent quotas"
 
 [ui]
 # Sidebar width (auto-scaled based on workspace names, this sets the default)
-# sidebar_width = 26
+sidebar_width = 32
 
 # Minimum sidebar width when expanded (columns)
-# sidebar_min_width = 18
+# Auto-fit only grows past this floor for long workspace names, so raising
+# sidebar_width/sidebar_max_width alone did nothing for short names like
+# "allpdl" or "dotfiles" — forcing the floor is what actually widens it.
+sidebar_min_width = 32
 
 # Maximum sidebar width when expanded (columns)
-# sidebar_max_width = 36
+# herdr-agent-quota's 5h/7d row ("5h 85% 4h53m · 7d 86% 19h53m") needs more
+# room than the 36-column default gives it, so quota text was truncating.
+sidebar_max_width = 38
 
 # Start with the sidebar collapsed. Changes take effect on the next launch.
 # sidebar_start_collapsed = false

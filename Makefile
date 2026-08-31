@@ -70,9 +70,10 @@ ghostty:
 herdr:
 	$(call symlink,$(DOTFILES)/herdr/config.toml,$(HOME)/.config/herdr/config.toml)
 	$(call symlink,$(DOTFILES)/herdr/projects,$(HOME)/.config/herdr/plugins/config/cloudmanic.herdr-plus/projects)
-	# herdr-agent-quota runs from a local fork (github.com:joshfinnie/herdr-agent-quota,
-	# branch claude-multi-account) that fixes concurrent Claude accounts sharing one
-	# quota row. Clone it to ~/src/p/herdr-agent-quota, `cargo build --release`, then:
+	# herdr-agent-quota (github.com/levi-qiao/herdr-agent-quota) needs a local
+	# build, not a registry install. The multi-account fix I filed (PR #30) landed
+	# upstream on main (PR #31), so this now runs from upstream directly. Clone it
+	# to ~/src/p/herdr-agent-quota, `cargo build --release`, then:
 	#   herdr plugin link ~/src/p/herdr-agent-quota --enabled
 	#   herdr plugin action invoke herdr-agent-quota.configure
 	# Repeat the work profile's statusLine/session hooks with:

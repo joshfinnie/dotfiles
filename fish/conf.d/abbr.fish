@@ -7,3 +7,4 @@ abbr which "type -a"
 abbr ls "eza -lag --header"
 
 abbr gemini "agy"
+abbr cclaude "CLAUDE_CONFIG_DIR=~/.claude-work /opt/homebrew/bin/claude"

@@ -97,11 +97,9 @@ antigravity:
 packages: homebrew-packages node-packages python-packages rust-packages go-packages
 
 homebrew-packages:
-ifeq ($(shell uname),Darwin)
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/packages | grep -v '^\s*$$' | xargs brew install
+ifeq ($(shell uname),Darwin)
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/casks    | grep -v '^\s*$$' | xargs brew install --cask
-else
-	@echo "skipping homebrew-packages: macOS only"
 endif
 
 node-packages:

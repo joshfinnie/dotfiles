@@ -1,8 +1,11 @@
 # -------------------------------
 # Homebrew
 # -------------------------------
-if test -x /opt/homebrew/bin/brew
-    eval (/opt/homebrew/bin/brew shellenv)
+for brew in /opt/homebrew/bin/brew /home/linuxbrew/.linuxbrew/bin/brew
+    if test -x $brew
+        $brew shellenv fish | source
+        break
+    end
 end
 
 # -------------------------------

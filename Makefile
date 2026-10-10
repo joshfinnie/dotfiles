@@ -39,7 +39,6 @@ zsh:
 
 fish:
 	$(call symlink,$(DOTFILES)/fish/config.fish,$(HOME)/.config/fish/config.fish)
-	$(call symlink,$(DOTFILES)/fish/fish_variables,$(HOME)/.config/fish/fish_variables)
 	$(call symlink,$(DOTFILES)/fish/fish_plugins,$(HOME)/.config/fish/fish_plugins)
 	$(call symlink,$(DOTFILES)/fish/conf.d,$(HOME)/.config/fish/conf.d)
 	$(call symlink,$(DOTFILES)/fish/functions,$(HOME)/.config/fish/functions)

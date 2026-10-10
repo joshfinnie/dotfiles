@@ -4,3 +4,4 @@ zellij/plugins/*.wasm
 fish/conf.d/secrets.fish
 __pycache__/
 ai_agents/skills/synced/
+fish/fish_variables

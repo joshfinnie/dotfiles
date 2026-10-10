@@ -23,16 +23,13 @@ if status is-interactive
     # -------------------------------
     # PATH additions (AFTER asdf)
     # -------------------------------
-    fish_add_path $HOME/.cargo/bin
-    fish_add_path $HOME/go/bin
-    fish_add_path $HOME/.local/bin
+    fish_add_path -g $HOME/.cargo/bin
+    fish_add_path -g $HOME/go/bin
 
     nvm use default >/dev/null 2>&1
 
     set -gx EDITOR nvim
     set -gx FZF_DEFAULT_COMMAND 'ag -g "" --hidden --ignore .git'
-
-    source $HOME/.config/fish/conf.d/abbr.fish
 
     if command -q starship
         starship init fish | source
@@ -40,6 +37,14 @@ if status is-interactive
 
 end
 
+# -------------------------------
+# PATH additions (all shells)
+# -------------------------------
+fish_add_path -g $HOME/.local/bin
 
-# Added by Antigravity CLI installer
-set -gx PATH "/Users/josh/.local/bin" $PATH
+if test (uname) = Darwin
+    set -gx PNPM_HOME $HOME/Library/pnpm
+else
+    set -gx PNPM_HOME $HOME/.local/share/pnpm
+end
+fish_add_path -g $PNPM_HOME $PNPM_HOME/bin

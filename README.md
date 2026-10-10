@@ -14,7 +14,6 @@ Personal configuration files, version controlled.
 | `nvim/` | Neovim | `~/.config/nvim` |
 | `wezterm/` | WezTerm | `~/.config/wezterm` |
 | `js/` | JSHint | `~/.jshintrc` |
-| `doom/` | Doom Emacs | — |
 | `colors/` | Vim color schemes | — |
 | `iterm/` | iTerm2 color schemes | — |
 | `fonts/` | Fonts | — |

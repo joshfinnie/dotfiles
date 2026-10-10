@@ -17,7 +17,5 @@ alias latex="docker run -v `pwd`:/tmp latex pdflatex"
 
 alias vimflict="git diff --name-only | uniq | xargs vim"
 
-alias eza="/opt/homebrew/bin/eza"
-
 alias e="open -a /Applications/Emacs.app &"
 alias v="nvim"

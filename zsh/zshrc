@@ -50,4 +50,4 @@ eval "$(starship init zsh)"
 
 
 # Added by Antigravity CLI installer
-export PATH="/Users/josh/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

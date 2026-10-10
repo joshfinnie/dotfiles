@@ -84,6 +84,7 @@ herdr:
 claude:
 	$(call symlink,$(DOTFILES)/ai_agents/AGENTS.md,$(HOME)/.claude/CLAUDE.md)
 	$(call symlink,$(DOTFILES)/ai_agents/skills,$(HOME)/.claude/skills)
+	$(call symlink,$(DOTFILES)/ai_agents/agents,$(HOME)/.claude/agents)
 	$(call symlink,$(DOTFILES)/ai_agents/AGENTS.md,$(HOME)/AGENTS.md)
 
 codex:

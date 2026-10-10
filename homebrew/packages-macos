@@ -1,0 +1,10 @@
+# macOS-only homebrew packages (one per line, # for comments)
+ansible
+colima
+coreutils
+grep
+guile
+modularml/packages/modular
+python-setuptools
+python@3.12
+qemu

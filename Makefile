@@ -99,6 +99,7 @@ packages: homebrew-packages node-packages python-packages rust-packages go-packa
 homebrew-packages:
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/packages | grep -v '^\s*$$' | xargs brew install
 ifeq ($(shell uname),Darwin)
+	@grep -v '^\s*#' $(DOTFILES)/homebrew/packages-macos | grep -v '^\s*$$' | xargs brew install
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/casks    | grep -v '^\s*$$' | xargs brew install --cask
 endif
 

@@ -1,0 +1,3 @@
+# Claude Code plugins as plugin@marketplace (one per line, # for comments)
+rust-analyzer-lsp@claude-plugins-official
+stripe@claude-plugins-official

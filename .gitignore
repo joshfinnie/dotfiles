@@ -3,5 +3,8 @@ Thumbs.db
 zellij/plugins/*.wasm
 fish/conf.d/secrets.fish
 __pycache__/
-ai_agents/skills/synced/
+# Installed skills are listed in ai_agents/skills.txt; add a ! line for each skill written here
+ai_agents/skills/*
+!ai_agents/skills/blog-post/
+!ai_agents/skills/humanize-writing/
 fish/fish_variables

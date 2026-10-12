@@ -1,0 +1,24 @@
+# skills as "<source> <skill>" for `skills add` (one per line, # for comments)
+aws/agent-toolkit-for-aws/skills amazon-bedrock
+aws/agent-toolkit-for-aws/skills aws-ai-ml
+aws/agent-toolkit-for-aws/skills aws-auth
+aws/agent-toolkit-for-aws/skills aws-billing-and-cost-management
+aws/agent-toolkit-for-aws/skills aws-blocks
+aws/agent-toolkit-for-aws/skills aws-cdk
+aws/agent-toolkit-for-aws/skills aws-cloudformation
+aws/agent-toolkit-for-aws/skills aws-compute
+aws/agent-toolkit-for-aws/skills aws-containers
+aws/agent-toolkit-for-aws/skills aws-database
+aws/agent-toolkit-for-aws/skills aws-deployment
+aws/agent-toolkit-for-aws/skills aws-iam
+aws/agent-toolkit-for-aws/skills aws-messaging-and-streaming
+aws/agent-toolkit-for-aws/skills aws-networking
+aws/agent-toolkit-for-aws/skills aws-observability
+aws/agent-toolkit-for-aws/skills aws-sdk-js-v3-usage
+aws/agent-toolkit-for-aws/skills aws-sdk-python-usage
+aws/agent-toolkit-for-aws/skills aws-sdk-swift-usage
+aws/agent-toolkit-for-aws/skills aws-security
+aws/agent-toolkit-for-aws/skills aws-serverless
+aws/agent-toolkit-for-aws/skills aws-storage
+aws/agent-toolkit-for-aws/skills launch-with-aws
+aws/agent-toolkit-for-aws/skills signing-in-to-aws

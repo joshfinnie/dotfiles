@@ -1,7 +1,7 @@
 DOTFILES := $(shell pwd)
 
 .PHONY: all bash zsh fish tmux vim nvim js wezterm zellij ghostty herdr claude codex antigravity \
-        packages homebrew-packages node-packages python-packages rust-packages go-packages
+        packages skills homebrew-packages node-packages python-packages rust-packages go-packages
 
 all: bash zsh fish tmux vim nvim js wezterm zellij ghostty herdr claude codex antigravity
 
@@ -94,7 +94,7 @@ antigravity:
 
 # packages
 
-packages: homebrew-packages node-packages python-packages rust-packages go-packages
+packages: homebrew-packages node-packages python-packages rust-packages go-packages skills
 
 homebrew-packages:
 	@grep -v '^\s*#' $(DOTFILES)/homebrew/packages | grep -v '^\s*$$' | xargs brew install
@@ -114,3 +114,6 @@ rust-packages:
 
 go-packages:
 	@grep -v '^\s*#' $(DOTFILES)/go/packages | grep -v '^\s*$$' | while read pkg; do go install $$pkg; done
+
+skills:
+	@$(DOTFILES)/ai_agents/install-skills.sh

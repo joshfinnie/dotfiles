@@ -24,9 +24,15 @@
 
 - Narrow reads with deterministic CLI tools.
 - Use `rg -n <pattern> <path>` for exact matches.
+  `rg` recurses by default; unlike `grep`, it has no `-r` recursion flag.
+  In `rg`, `-r` means `--replace` and rewrites the matched text in the output, so
+  `rg -rn` and `rg -rln` silently corrupt results. Never use them.
+  Other flags: `-l` paths only, `-w` whole word, `-F` literal string, `-g` glob filter.
 - Read only relevant symbols or line ranges.
 - Review edits with `git diff -- <path>`.
 - Prefer syntax-aware tools for bulk edits.
 - Use `ast-grep` for structural rewrites.
 - Use `fastmod` for safe string replacements.
 - Use `repomap.md` if available.
+
+cp and rm are aliased to a mode that does not work in claude. Run with the real binaries.

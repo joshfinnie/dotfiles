@@ -12,6 +12,8 @@ cursor-style = block
 cursor-style-blink = false
 cursor-click-to-move = true
 
+macos-option-as-alt = left
+
 clipboard-paste-protection = true
 copy-on-select = true
 selection-background = #44475a

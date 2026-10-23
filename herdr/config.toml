@@ -142,6 +142,12 @@ type = "plugin_action"
 command = "herdr-agent-quota.refresh"
 description = "refresh all agent quotas"
 
+[[keys.command]]
+key = "alt+f"
+type = "plugin_action"
+command = "herdr-float.toggle"
+description = "Toggle floating shell"
+
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
 # [keys.indexed]

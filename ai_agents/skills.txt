@@ -22,3 +22,10 @@ aws/agent-toolkit-for-aws/skills aws-serverless
 aws/agent-toolkit-for-aws/skills aws-storage
 aws/agent-toolkit-for-aws/skills launch-with-aws
 aws/agent-toolkit-for-aws/skills signing-in-to-aws
+# humanize is skipped: the personal humanize-writing skill covers it
+joshfinnie/skills handoff
+joshfinnie/skills mermaid-gen
+joshfinnie/skills new-repo
+joshfinnie/skills og-image
+joshfinnie/skills skill-writing
+joshfinnie/skills staff-review

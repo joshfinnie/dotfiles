@@ -9,6 +9,8 @@
 
 - Never use the em dash "—".
 - When writing commit messages, NEVER auto-add your agent name as co-author
+- Commit as `Josh Finnie <josh@jfin.us>`, except in repos owned by the `peopledatalabs` GitHub org, which use `josh.finnie@peopledatalabs.com`.
+  The global git config defaults to the PDL address, so set `user.email` locally in personal repos before committing.
 - Never manually modify CHANGELOG.md files or any files that are marked as auto-generated
 - When making technical decisions, do not give much weight to development cost.
   Instead, prefer quality, simplicity, robustness, scalability, and long term maintainability.

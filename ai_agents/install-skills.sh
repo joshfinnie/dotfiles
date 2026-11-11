@@ -20,6 +20,6 @@ done
 # Codex and Antigravity read the same folder through the Makefile symlinks,
 # so installing for Claude Code covers all three.
 for source in $(entries "$dir/skills.txt" | awk '{print $1}' | sort -u); do
-    mapfile -t names < <(entries "$dir/skills.txt" | awk -v s="$source" '$1 == s {print $2}')
+    read -r -a names <<<"$(entries "$dir/skills.txt" | awk -v s="$source" '$1 == s {print $2}' | tr '\n' ' ')"
     pnpm dlx skills add "$source" --global --agent claude-code --yes --skill "${names[@]}"
 done

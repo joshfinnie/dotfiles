@@ -51,3 +51,6 @@ else
     set -gx PNPM_HOME $HOME/.local/share/pnpm
 end
 fish_add_path -g $PNPM_HOME $PNPM_HOME/bin
+
+# Node gives each IPv6/IPv4 attempt 250ms by default; slow or IPv6-less networks time out npm and pnpm.
+set -gx NODE_OPTIONS --network-family-autoselection-attempt-timeout=1000
